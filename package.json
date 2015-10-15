@@ -14,6 +14,12 @@
     "carpool-buddy"
   ],
   "author": "",
+  "contributors": [
+    {
+      "name": "Austin A. King",
+      "email": "aust.a.king@gmail.com"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/carpool-buddy/carpool-buddy/issues"
