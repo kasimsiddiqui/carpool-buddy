@@ -1,0 +1,22 @@
+{
+  "name": "carpool-buddy",
+  "version": "1.0.0",
+  "description": "carpool-buddy",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carpool-buddy/carpool-buddy.git"
+  },
+  "keywords": [
+    "carpool-buddy"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/carpool-buddy/carpool-buddy/issues"
+  },
+  "homepage": "https://github.com/carpool-buddy/carpool-buddy#readme"
+}
