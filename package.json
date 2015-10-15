@@ -13,7 +13,9 @@
   "keywords": [
     "carpool-buddy"
   ],
-  "author": "",
+  "author": [
+    "Zach Gordon <zachkgordon@gmail.com>"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/carpool-buddy/carpool-buddy/issues"
