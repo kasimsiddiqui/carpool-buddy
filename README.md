@@ -1,10 +1,27 @@
 # carpool-buddy
 
+## Enviromental Variables
+
+The following enviromental variables are suggested for your machine
+
+APP_SECRET
+
 ## Api
 
 ### User Routes
 
 POST /api/signup
+  creates a user in the database. It requires a JSON object to be attached
+  to req.body.user. The JSON object should have the fields email, basic,
+  and carSeats(including the driver seat and should be 0 if user does
+  not have a car). It should look like this:
+
+```
+req.body.user = {"email": "email@email.com", "basic": {
+    "email": "email@email.com", "password": "fUzzYkIttenZ334"
+  },
+  "carSeats": "2"}
+```
 
 GET /api/signin
 
@@ -24,13 +41,13 @@ req {
 }
 ```
 
-POST /api/trip/:stringifiedJSON
-  creates a trip entry in the database. Needs a stringified JSON object
-  with the trip origin, originTime, dest, destTime, weekDays, map, and userId
-  it should look like:
+POST /api/trip
+  creates a trip entry in the database. Needs a JSON object
+  attached to req.body.trip with the trip origin, originTime, dest,
+  destTime, weekDays, map, and userId. it should look like:
 
 ```
-{"origin":"map coordinates", "originTime":"08:00 AM", "dest":"map coordinates",
+req.body.trip = {"origin":"map coordinates", "originTime":"08:00 AM", "dest":"map coordinates",
  "weekDays":"mon, tue, thu, sat", "userId":"9H83TY3H12"}
 ```
 
