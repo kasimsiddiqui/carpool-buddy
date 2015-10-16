@@ -5,6 +5,8 @@
 The following enviromental variables are suggested for your machine
 
 APP_SECRET
+MONGODB_URL
+PORT
 
 ## Api
 
@@ -27,10 +29,19 @@ GET /api/signin
 
 ### Trip Routes
 
-GET /api/trip/:userid
-  takes a user id and returns an array of trip objects that the user is 
-  a part of on req.body.trips
+GET /api/trip
+  if a req.body.userEmail is given it returns an array of trip objects that the user is 
+  a part of on res.body.trips
 
+  if there is also a req.body.tripSearch object then search results will
+  be returned for the search view. The trip search object should have a
+  orgin, originTime, dest, and destTime. It should look like:
+
+```
+req.body.tripSearch = {"origin": "map coordinates", "originTime": }
+```
+  
+  the return will look like:
 ```
 req {
   body {
@@ -51,5 +62,5 @@ req.body.trip = {"origin":"map coordinates", "originTime":"08:00 AM", "dest":"ma
  "weekDays":"mon, tue, thu, sat", "userId":"9H83TY3H12"}
 ```
 
-DELETE /api/trip/:tripId
-  takes a trip id and deletes that trip object from the database
+DELETE /api/trip
+  takes a trip id on req.body.tripId and deletes that trip object from the database
