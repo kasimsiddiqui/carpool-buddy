@@ -26,7 +26,11 @@
     {
       "name": "Erik Luetkehans",
       "email": "eluetkehans@gmail.com"
-    }
+    },
+    {
+      "name": "Kasim Siddiqui",
+      "email": "kasimsiddiqui@gmail.com"
+    }   
   ],
   "dependencies": {
     "bcrypt": "^0.8.5",
