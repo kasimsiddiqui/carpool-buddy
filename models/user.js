@@ -1,9 +1,10 @@
 var mongoose = require('mongoose');
-var ObjectId = mongoose.Schema.ObjectId
+var ObjectId = mongoose.Schema.ObjectId;
 var bcrypt = require('bcrypt');
 var eat = require('eat');
 
 var userSchema = new mongoose.Schema({
+  name: String,
   email: {type: String, unique: true},
   basic: {
     email: String,
