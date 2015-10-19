@@ -10,23 +10,23 @@ module.exports = {
   // },
   sass: {
     src: src + "/styles/**/*.{sass,scss}",
-    dest: dest + '/styles/',
+    dest: dest + '/styles/css/',
     settings: {
       indentedSyntax: true, // Enable .sass syntax!
     }
   },
-  // fonts: {
-  //     src: src + '/styles/fonts/*',
-  //     dest: dest + "/styles/fonts/",
-  //     extensions: ['woff2', 'woff', 'eot', 'ttf', 'svg']
-  // },
+  fonts: {
+      src: src + '/styles/fonts/*',
+      dest: dest + "/styles/fonts/",
+      extensions: ['woff2', 'woff', 'eot', 'ttf', 'svg']
+  },
   index: {
     src: src + "/index.html",
     dest: dest
   },
   html: {
     src: src + "/app/**/*.html",
-    dest: dest + "/views/"
+    dest: dest
   },
   server: {
     src: dest,
