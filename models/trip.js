@@ -1,14 +1,17 @@
 var mongoose = require('mongoose');
-var ObjectId = mongoose.Schema.ObjectId
+var ObjectId = mongoose.Schema.ObjectId;
+
 
 var tripSchema = mongoose.Schema({
+  tripName: String,
   origin: String,
-  originTime: String,
+  originTime: Number,
   dest: String,
-  destTime: String,
+  destTime: Number,
   weekDays: String,
   map: String,
   travelers: [ObjectId],
+
   seatsLeft: Number
 });
 
