@@ -1,0 +1,18 @@
+@mixin button($background, $text-color, $size) {
+  text-transform: uppercase;
+  background: $background;
+  color: $text-color;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  padding-left: $size;
+  padding-right: $size;
+  margin-left: .25em;
+  margin-right: .25em;
+  font-size: font-size(0);
+}
+
+.btn {
+  @include button($primary-color-light, $text-light, 2em)
+}
