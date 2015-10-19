@@ -10,8 +10,10 @@ var userSchema = new mongoose.Schema({
     email: String,
     password: String
   },
-  carSeats: Number,
-  trips: [ObjectId]
+
+  name: String,   //public name that user creates
+  carSeats: {type: Number, default: 0}, //if 0, then they don't have a car
+  trips: [ObjectId] //array of trips the user is signed up with
 });
 
 userSchema.methods.generateHash = function(password, callback) {

@@ -1,6 +1,9 @@
 #Mac Files
 .DS_Store
 
-# Dependency Directory
+#Dependency Directory
 node_modules
 db
+
+#Dev Environment
+.env
