@@ -45,7 +45,7 @@ req.body.tripSearch = {"origin": "map coordinates", "originTime": "08:00 AM",
   
   the return will look like:
 ```
-req {
+res {
   body {
     trips {
       [{_id: 0, dest: there}, {_id: 1, dest: here}, {_id: 2, dest: elsewere}]

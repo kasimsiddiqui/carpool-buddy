@@ -18,11 +18,17 @@ describe('Trip routes', function() {
     trip.dest = "dest";
     trip.originTime = 8 * 1000 * 60 * 60;
     trip.destTime = 20 * 1000 * 60 * 60;
+    trip.travelers = [mongoose.Types.ObjectId('560d88ab95136958181e421f')];
     trip.save(function(err, data) {
       if (err) throw err;
-      done();
+      var user = new User();
+      user.email = "test email";
+      user._id = mongoose.Types.ObjectId('560d88ab95136958181e421f');
+      user.save(function(err, data) {
+        if (err) throw err;
+        done();
+      });
     });
-
   });
 
   after(function(done) {
@@ -44,6 +50,16 @@ describe('Trip routes', function() {
         expect(res.body.trips[0].origin).to.eql("origin");
         done();
       });
+  });
 
+  it('should search trips by user id', function(done) {
+    chai.request(url)
+      .get('/trips')
+      .send({userEmail: "test email"})
+      .end(function(err, res) {
+        expect(err).to.eql(null);
+        expect(res.body.trips[0].origin).to.eql("origin");
+        done();
+      });
   });
 });
