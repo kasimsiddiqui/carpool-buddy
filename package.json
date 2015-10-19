@@ -15,6 +15,7 @@
   ],
   "author": [
     "Zach Gordon <zachkgordon@gmail.com>",
+    "James Norton <james.norton@me.com>",
     "Erik Luetkehans <eluetkehans@gmail.com>"
   ],
   "dependencies": {
@@ -33,21 +34,26 @@
     "chai": "^3.2.0",
     "chai-http": "^1.0.0",
     "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^3.0.2",
+    "gulp-express": "^0.3.5",
     "gulp-mocha": "^2.1.3",
+    "gulp-notify": "^2.2.0",
+    "gulp-ng-config": "^1.2.1",
+    "gulp-sass": "^2.0.4",
+    "gulp-webserver": "^0.9.1",
     "jasmine-core": "^2.3.4",
     "karma": "^0.13.10",
     "karma-jasmine": "^0.3.6",
     "karma-phantomjs-launcher": "^0.2.1",
     "mocha": "^2.3.2",
     "phantomjs": "^1.9.18",
+    "require-dir": "^0.3.0",
+    "webpack": "^1.12.2",
     "webpack-stream": "^2.1.1"
   },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/carpool-buddy/carpool-buddy/issues"
   },
-  "homepage": "https://github.com/carpool-buddy/carpool-buddy#readme",
-  "devDependencies": {
-    "gulp-sass": "^2.0.4"
-  }
+  "homepage": "https://github.com/carpool-buddy/carpool-buddy#readme"
 }
