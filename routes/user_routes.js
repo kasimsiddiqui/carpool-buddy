@@ -10,5 +10,9 @@ var userEvents = require(__dirname + '/../events/user_events');
 var userRoutes = module.exports = exports = express.Router();
 
 userRoutes.post('/signup', jsonParser, function(req, res) {
-  userEvents.emit('new_user_signing_up', req, res);
+  userEvents.emit('create_new_user', req, res);
+});
+
+userRoutes.get('/signin', httpBasic, function(req, res) {
+  userEvents.emit('log_in_user', req, res);
 });

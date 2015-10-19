@@ -29,21 +29,76 @@ describe('http_basic', function() {
       expect(req.auth.password).to.eql('foobar123');
     });
   });
+});
 
-  describe('auth', function() {
-    after(function(done) {
-      mongoose.connection.db.dropDatabase(function() {
+describe('auth', function() {
+  after(function(done) {
+    mongoose.connection.db.dropDatabase(function() {
+      done();
+    });
+  });
+
+  it("should be able to create a user", function(done) {
+    chai.request(url)
+      .post('/signup')
+      .send({email: 'test2@example.com', password: 'foobar123'})
+      .end(function(err, res) {
+        expect(err).to.eql(null);
+        expect(res.body.token).to.have.length.above(0);
+        done();
+      });
+  });
+
+  describe("user already in database", function() {
+    before(function(done) {
+      var user = new User();
+      user.email = user.basic.email = 'test3@example.com';
+      user.generateHash('foobar123', function(err, res) {
+        if(err) {throw err;}
+        user.save(function(err) {
+          if(err) {throw err;}
+          user.generateToken(function(err, token) {
+            if(err) {throw err;}
+            this.token = token;
+            done();
+          }.bind(this));
+        }.bind(this));
+      }.bind(this));
+    });
+
+    it("should be able to sign in", function(done) {
+      chai.request(url)
+        .get('/signin')
+        .auth('test3@example.com', 'foobar123')
+        .end(function(err, res) {
+          expect(err).to.eql(null);
+          expect(res.body.token).to.have.length.above(0);
+          done();
+        });
+    });
+
+    it("should be able to authenticate with eatAuth", function(done) {
+      var token = this.token;
+      var req = {
+        headers: {
+          token: token
+        }
+      };
+
+      eatAuth(req, {}, function() {
+        expect(req.user.email).to.eql('test3@example.com');
         done();
       });
     });
 
-    it("should be able to create a user", function(done) {
+    it("should respond accordingly if email already exists", function(done) {
       chai.request(url)
         .post('/signup')
-        .send({email: 'test2@example.com', password: 'foobar123'})
+        .send({email: 'test3@example.com', password: 'fooey123'})
         .end(function(err, res) {
           expect(err).to.eql(null);
-          expect(res.body.token).to.have.length.above(0);
+          expect(res.status).to.eql(409);
+          expect(res.body.msg).to.eql("A user has already signed up with that email.")
           done();
         });
     });
