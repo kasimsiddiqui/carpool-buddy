@@ -9,3 +9,41 @@ var User = require(__dirname + '/../models/user');
 var url = 'localhost:3000/api';
 
 require(__dirname + '/../server');
+
+describe('Trip routes', function() {
+  before(function(done) {
+    //populate a trip to search for
+    var trip = new Trip();
+    trip.origin = "origin";
+    trip.dest = "dest";
+    trip.originTime = 8 * 1000 * 60 * 60;
+    trip.destTime = 20 * 1000 * 60 * 60;
+    trip.save(function(err, data) {
+      if (err) throw err;
+      done();
+    });
+
+  });
+
+  after(function(done) {
+    mongoose.connection.db.dropDatabase(function(err) {
+      if (err) throw err;
+      done();
+    });
+  });
+
+  it('should search +/- 30 min', function(done) {
+    var tripSearch = {"origin": "origin", "dest": "dest",
+                      "originTime": (8 * 1000 * 60 * 60) - (29 * 1000 * 60), // 29 min under
+                      "destTime": (8 * 1000 * 60 * 60) + (29 * 1000 * 60)}; // 29 min over
+    chai.request(url)
+      .get('/trips')
+      .send({tripSearch: tripSearch})
+      .end(function(err, res) {
+        expect(err).to.eql(null);
+        expect(res.body[0].origin).to.eql("origin");
+        done();
+      });
+
+  });
+});

@@ -9,8 +9,8 @@ var userSchema = new mongoose.Schema({
     email: String,
     password: String
   },
-  carSeats: {type: 32-bit integer},
-  trips: [{type: Object id}]
+  carSeats: {type: Number},
+  trips: [{type: ObjectId}]
 });
 
 userSchema.methods.generateHash = function(password, callback) {

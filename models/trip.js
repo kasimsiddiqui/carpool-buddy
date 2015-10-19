@@ -1,15 +1,16 @@
 var mongoose = require('mongoose');
+// var ObjectId = mongoose.Schema.ObjectId;
 
 var tripSchema = mongoose.Schema({
   tripName: String,
   origin: String,
-  originTime: String,
+  originTime: Number,
   dest: String,
-  destTime: String,
+  destTime: Number,
   weekDays: String,
   map: String,
-  travellers: [{type: ObjectId}],
-  seatsLeft: {type: 32-bit integer}
+  travelers: [{type: mongoose.Schema.ObjectId, ref: 'User'}],
+  seatsLeft: Number
 });
 
 module.exports = mongoose.model('Trip', tripSchema);
