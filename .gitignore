@@ -1,6 +1,7 @@
 # Mac Files
 .DS_Store
 
+<<<<<<< HEAD
 # Logs
 logs
 *.log
@@ -29,6 +30,12 @@ build/Release
 node_modules
 db
 
-# Compiled Public Directory
+#Dependency Directory
+node_modules
+db
 public
+
+#Dev Environment
+.env
+
 

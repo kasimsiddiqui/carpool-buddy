@@ -7,17 +7,25 @@
     <meta name="description" content="Carpool Finder Web App, find a carpool in Seattle">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="/styles/main.css">
   </head>
   <body>
     <header>
-      <nav>Nav Bar</nav>
-      <ul>
-        <li>Zachary Trips</li>
-        <li>Find Trips</li>
-        <li>Create Trips</li>
-        <li>Delete Trips</li>
-      </ul>
+
+      <section>
+        <h1>Carpool Buddy</h1>
+        <nav>
+          <label for="show-menu">
+            <span class="icon-menu"></span>
+          <input type="checkbox" id="show-menu">
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">All Trips</a></li>
+            <li><a href="#">Create Trips</a></li>
+            <li><a href="#">Edit Trips</a></li>
+          </ul>
+        </nav>
+      </section>
     </header>
 
     <main>
@@ -60,7 +68,13 @@
       </section>
 
     <footer>
-      <p>Footer Here</p>
+      <p class="footer">&#169 Carpool Buddy LLC</p>
+      <ul>
+        <li><span class="icon-facebook2"></span></li>
+        <li><span class="icon-twitter"></span></li>
+        <li><span class="icon-pinterest2"></span></li>
+        <li><span class="icon-github"></span></li>
+      </ul>
     </footer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
