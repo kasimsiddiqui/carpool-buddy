@@ -1,5 +1,6 @@
 var express = require('express');
 var Trip = require(__dirname + "/../models/trip");
+var User = require(__dirname + "/../models/user");
 var jsonParser = require('body-parser').json();
 var handleError = require(__dirname + '/../lib/handle_error');
 var dateParser = require(__dirname + '/../lib/date_parser');
@@ -27,8 +28,9 @@ tripsRoute.get('/trips', jsonParser, function(req, res) {
                       ]}
               ]}, function(err, docs) {
       if (err) handleError(err, res);
-      debugger;
-      res.json(docs);
+      res.json({trips: docs});
     });
   }
+  // Otherwise we are finding all the trips the user is a part of.
+
 });

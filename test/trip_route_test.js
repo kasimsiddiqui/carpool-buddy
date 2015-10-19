@@ -41,7 +41,7 @@ describe('Trip routes', function() {
       .send({tripSearch: tripSearch})
       .end(function(err, res) {
         expect(err).to.eql(null);
-        expect(res.body[0].origin).to.eql("origin");
+        expect(res.body.trips[0].origin).to.eql("origin");
         done();
       });
 
