@@ -34,8 +34,8 @@ describe('Trip routes', function() {
 
   it('should search +/- 30 min', function(done) {
     var tripSearch = {"origin": "origin", "dest": "dest",
-                      "originTime": (8 * 1000 * 60 * 60) - (29 * 1000 * 60), // 29 min under
-                      "destTime": (8 * 1000 * 60 * 60) + (29 * 1000 * 60)}; // 29 min over
+                      "originTime": "07:59 AM", // 29 min under
+                      "destTime": "08:01 PM"}; // 29 min over
     chai.request(url)
       .get('/trips')
       .send({tripSearch: tripSearch})

@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var ObjectId = mongoose.Schema.ObjectId
+var ObjectId = mongoose.Schema.ObjectId;
 var bcrypt = require('bcrypt');
 var eat = require('eat');
 
