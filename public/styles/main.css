@@ -74,6 +74,39 @@ header {
       header ul li span {
         display: inline; } }
 
+footer {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-size: .4em;
+  border-top: 1px solid black;
+  padding-top: 3em; }
+  footer p {
+    padding-bottom: 1em; }
+  footer ul {
+    padding-bottom: 1em;
+    text-align: center;
+    text-transform: uppercase; }
+  footer li {
+    padding-left: 2em;
+    padding-right: 2em;
+    display: inline; }
+
 #lean_overlay {
   position: fixed;
   z-index: 100;
