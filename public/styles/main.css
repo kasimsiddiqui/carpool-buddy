@@ -32,6 +32,48 @@
 .icon-pinterest2:before {
   content: "\e803"; }
 
+header {
+  background-color: none; }
+  header h1 {
+    color: #000;
+    font-size: 1.5em;
+    padding: 1em;
+    text-align: center; }
+  header ul li {
+    display: none;
+    padding-left: .5em;
+    padding-bottom: .3em;
+    color: #000; }
+  header .icon-menu:before {
+    padding-left: .5em; }
+  header input[type=checkbox] {
+    display: none; }
+  header input[type=checkbox]:checked ~ ul li {
+    display: block; }
+
+@media only screen and (min-width: 650px) {
+  header .icon-menu {
+    display: none; }
+  header h1 {
+    position: absolute;
+    padding-top: 1.9em;
+    padding-left: 1.9em;
+    padding-bottom: 1.9em; }
+  header ul {
+    position: relative;
+    padding-top: 5em;
+    padding-right: 5em;
+    padding-bottom: 5em;
+    font-size: .7em;
+    text-transform: uppercase; }
+    header ul li {
+      padding-left: 1em;
+      padding-right: 1em;
+      float: right;
+      display: inline; }
+      header ul li span {
+        display: inline; } }
+
 #lean_overlay {
   position: fixed;
   z-index: 100;
