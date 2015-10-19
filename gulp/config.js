@@ -10,7 +10,7 @@ module.exports = {
   // },
   sass: {
     src: src + "/styles/**/*.{sass,scss}",
-    dest: dest + '/styles/css/',
+    dest: dest + '/styles/',
     settings: {
       indentedSyntax: true, // Enable .sass syntax!
     }
@@ -25,7 +25,7 @@ module.exports = {
     dest: dest
   },
   html: {
-    src: src + "/app/**/*.html",
+    src: src + "/app/*.html",
     dest: dest
   },
   server: {
