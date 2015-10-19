@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var ObjectId = mongoose.Schema.ObjectId
 var bcrypt = require('bcrypt');
 var eat = require('eat');
 
@@ -9,8 +10,8 @@ var userSchema = new mongoose.Schema({
     email: String,
     password: String
   },
-  carSeats: {type: Number},
-  trips: [{type: ObjectId}]
+  carSeats: Number,
+  trips: [ObjectId]
 });
 
 userSchema.methods.generateHash = function(password, callback) {

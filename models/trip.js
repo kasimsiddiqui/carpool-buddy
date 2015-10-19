@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
-// var ObjectId = mongoose.Schema.ObjectId;
+var ObjectId = mongoose.Schema.ObjectId;
+
 
 var tripSchema = mongoose.Schema({
   tripName: String,
@@ -9,7 +10,8 @@ var tripSchema = mongoose.Schema({
   destTime: Number,
   weekDays: String,
   map: String,
-  travelers: [{type: mongoose.Schema.ObjectId, ref: 'User'}],
+  travelers: [ObjectId],
+
   seatsLeft: Number
 });
 
