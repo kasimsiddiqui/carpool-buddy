@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/carpool-buddy/carpool-buddy/issues"
   },
-  "homepage": "https://github.com/carpool-buddy/carpool-buddy#readme"
+  "homepage": "https://github.com/carpool-buddy/carpool-buddy#readme",
+  "devDependencies": {
+    "gulp-sass": "^2.0.4"
+  }
 }
