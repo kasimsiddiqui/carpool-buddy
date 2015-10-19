@@ -13,9 +13,20 @@
   "keywords": [
     "carpool-buddy"
   ],
-  "author": [
-    "Zach Gordon <zachkgordon@gmail.com>",
-    "Erik Luetkehans <eluetkehans@gmail.com>"
+  "author": "",
+  "contributors": [
+    {
+      "name": "Austin A. King",
+      "email": "aust.a.king@gmail.com"
+    },
+    {
+      "name": "Zach Gordon",
+      "email": "zachkgordon@gmail.com"
+    },
+    {
+      "name": "Erik Luetkehans",
+      "email": "eluetkehans@gmail.com"
+    }
   ],
   "dependencies": {
     "bcrypt": "^0.8.5",
