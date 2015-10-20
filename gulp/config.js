@@ -24,6 +24,11 @@ module.exports = {
   //   src: src + "/index.html",
   //   dest: dest
   // },
+  images: {
+      src: src + '/imgs/*',
+      dest: dest + '/imgs',
+      extensions: ['jpg', 'png', 'svg', 'gif']
+   },
   html: {
     src: src + "/**/*.html",
     dest: dest
