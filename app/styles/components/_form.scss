@@ -1,11 +1,12 @@
 
-#login-form {
+#login-form,
+#sign-up-form {
   max-width: 450px;
   width: 95%;
   box-sizing: border-box;
   position: absolute;
   background: #fff;
-  font-family: "Circular Bold";
+  font-family: 'Josefin Sans', sans-serif;
   display: none;
   color: black;
   text-align: center;
@@ -32,6 +33,7 @@
       font-size: smaller;
 
       &.form-close {
+        font-family: 'Times New Roman', Times, Baskerville, Georgia, serif;
         position: absolute;
         font-size: 1.5em;
         color: #f00;
@@ -40,8 +42,9 @@
         border-radius: 40px;
         padding-left: 0.25em;
         padding-right: 0.25em;
-        margin-top: -45px;
-        margin-left: 89%;
+        top: 0;
+        left: 92%;
+
         cursor: pointer;
 
         &:hover {
@@ -49,8 +52,7 @@
         }
 
         @media only screen and (max-width: 450px) {
-          margin-left: 80%;
-          margin-top: -25px;
+           left: 90%;
           border: 2px solid #eee;
         }
       }
@@ -102,14 +104,14 @@
     button {
       font-size: 1em;
       font-weight: bold;
-      color: #00aeef;
+      color: $primary-color-light;
       display: block;
       width: 100%;
       margin-top: 1em;
       padding-top: 1.5em;
       padding-bottom: 1.5em;
       background-color: #fff;
-      border: 3px solid #00aeef;
+      border: 3px solid $primary-color-light;
 
       cursor: pointer;
       -webkit-transition: 0.3s ease all;
@@ -123,7 +125,7 @@
     }
         button:hover {
             color: #fff;
-            background-color: #00aeef;
+            background-color: $primary-color-light;
         }
   }
 

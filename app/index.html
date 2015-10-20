@@ -22,12 +22,30 @@
       <form>
         <fieldset>
           <a class="form-close" id="form-close">X</a>
-          <h2 class="btn log_in_top">Car Pool Buddy</h2>
+          <h2 class="logo">Car Pool Buddy</h2>
 
           <label for="form-email">Email</label>
           <input type="email" name="email" id="form-email" spellcheck="false" />
           <label for="form-company-name">Password</label>
           <input type="password" name="password" id="login-password" spellcheck="false" />
+          <button type="submit">Submit</login>
+        </fieldset>
+      </form>
+    </div>
+
+    <div id="sign-up-form">
+      <form>
+        <fieldset>
+          <a class="form-close" id="form-close">X</a>
+          <h2 class="logo">Car Pool Buddy</h2>
+
+          <label for="form-email">Email</label>
+          <input type="email" name="email" id="form-email" spellcheck="false" />
+          <label for="form-company-name">Password</label>
+          <input type="password" name="password" id="login-password" spellcheck="false" />
+          <label for="form-company-name">Password Confirm</label>
+          <input type="password" name="password" id="login-password" spellcheck="false" />
+
           <button type="submit">Submit</login>
         </fieldset>
       </form>
@@ -54,8 +72,8 @@
       <section class="secondary_page">
         <h1 class="logo">Car Pool Buddy</h1>
 
-        <a href="#" class="btn">Sign Up</a>
-        <a href="#" class="btn">Log In</a>
+        <a href="#sign-up-form" class="btn" id="sign_up">Sign Up</a>
+        <a href="#login-form" class="btn" id="login_button_2">Log In</a>
 
       </section>
 
