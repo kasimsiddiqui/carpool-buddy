@@ -1,14 +1,16 @@
-var distance = require('google-distance');
-//distance.apiKey = 'API_KEY';
+module.exports = function(location1, location2, callback) {
+  var distance = require('google-distance');
 
-distance.get(
-  {
-    origin: 'Seattle, WA', //example
-    destination: 'Portland, OR', //example
-    units: 'imperial'
-  },
+  distance.apiKey = process.env.GOOGLE_MAPS_API_KEY;
+  distance.get(
+    {
+      origin: location1,
+      destination: location2,
+      units: 'imperial'
+    },
 
-  function(err, data) {
-    if (err) return console.log(err);
-    console.log(data.distance);
-});
+    function (err, data) {
+      if (err) return console.log(err);
+      callback(parseInt(data.distance));
+  });
+};

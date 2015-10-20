@@ -1,15 +1,36 @@
 .secondary_page {
-  font-family: 'Josefin Sans', sans-serif;
-  margin: 7em 10% 2em;
-  text-align: center;
+ font-family: 'Josefin Sans', sans-serif;
+ margin: 7em 10% 2em;
+ text-align: center;
 
-  h1 {
-    font-size: 2.25em;
-    margin: 1em 0;
-  }
+ h1 {
+  margin-bottom: 1em;
+ }
 
-  p {
-    font-size: 1.5em;
-    line-height: 1.25;
-  }
+ @media only screen and (min-width: 320px) {
+   p{
+     font-size: 1em;
+   }
+
+ }
+
+ @media only screen and (min-width: 410px) {
+   p{
+     font-size: 2em;
+   }
+ }
+
+}
+
+ .banner-imgs-2{
+   width: auto;
+   overflow: hidden;
+   @media only screen and (min-width: 320px) {
+   height: 20px;
+ }
+
+ @media only screen and (min-width: 410px) {
+   height: 220px;
+ }
+
 }

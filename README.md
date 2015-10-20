@@ -4,6 +4,7 @@
 
 The following enviromental variables are suggested for your machine
 
+GOOGLE_MAPS_API_KEY
 APP_SECRET
 MONGODB_URL
 PORT
@@ -61,8 +62,20 @@ POST /api/trip
 
 ```
 req.body.trip = {"tripName": "to work", "origin":"map coordinates", "originTime":"08:00 AM", "dest":"map coordinates",
- "weekDays":"mon, tue, thu, sat", "userId":"9H83TY3H12"}
+ "destTime": "10:00 AM", "weekDays":"mon, tue, thu, sat", "userEmail":"example@test.com"}
+```
+
+PUT /api/trip
+  subscribes or unsubscribes a user from a trip object in the database.
+  It takes a tripConfig object on req.body. tripConfig has the fields
+  'remove', 'userEmail', and 'tripId'. If remove is set to true, than the
+  user is unsubscribed from the trip, otherwise the user is added to the
+  trip. An example of the tripConfig object is:
+
+```
+req.body.tripConfig = {"remove": "true", "userEmail": "email@example.com", "tripId": "560d88ab95136958181e421f"};
 ```
 
 DELETE /api/trip
-  takes a trip id on req.body.tripId and deletes that trip object from the database
+  takes a trip id on req.body.tripId and deletes that trip object from the database.
+  returns 'success' on res.body.msg.

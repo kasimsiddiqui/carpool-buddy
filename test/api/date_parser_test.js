@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var dateParser = require(__dirname + "/../lib/date_parser");
+var dateParser = require(__dirname + "/../../lib/date_parser");
 
 describe('Date Parser', function() {
   it('should take in a string formated "hh:mm AM" and return that time in milliseconds', function() {

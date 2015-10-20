@@ -4,18 +4,19 @@ chai.use(chaiHttp);
 var expect = chai.expect;
 process.env.MONGODB_URL = 'mongodb://localhost/carpool_test';
 var mongoose = require('mongoose');
-var Trip = require(__dirname + '/../models/trip');
-var User = require(__dirname + '/../models/user');
+var Trip = require(__dirname + '/../../models/trip');
+var User = require(__dirname + '/../../models/user');
 var url = 'localhost:3000/api';
 
-require(__dirname + '/../server');
+require(__dirname + '/../../server');
 
 describe('Trip routes', function() {
   before(function(done) {
     //populate a trip to search for
     var trip = new Trip();
-    trip.origin = "origin";
-    trip.dest = "dest";
+    trip._id = mongoose.Types.ObjectId('421d88ab95136958181e421f');
+    trip.origin = "Bellevue, WA";
+    trip.dest = "Seattle, WA";
     trip.originTime = 8 * 1000 * 60 * 60;
     trip.destTime = 20 * 1000 * 60 * 60;
     trip.travelers = [mongoose.Types.ObjectId('560d88ab95136958181e421f')];
@@ -24,7 +25,31 @@ describe('Trip routes', function() {
       var user = new User();
       user.email = "test email";
       user._id = mongoose.Types.ObjectId('560d88ab95136958181e421f');
+      user.carSeats = 4;
       user.save(function(err, data) {
+        if (err) throw err;
+        done();
+      });
+    });
+  });
+
+  before(function(done) {
+    //populate a trip to search for
+    var trip2 = new Trip();
+    trip2._id = mongoose.Types.ObjectId('111d88ab95136958181e421f');
+    trip2.origin = "Bellevue, WA";
+    trip2.dest = "Seattle, WA";
+    trip2.originTime = 8 * 1000 * 60 * 60;
+    trip2.destTime = 20 * 1000 * 60 * 60;
+    trip2.travelers = [mongoose.Types.ObjectId('570d88ab95136958181e421f')];
+    trip2.save(function(err, data) {
+      if (err) throw err;
+      var user2 = new User();
+      user2.email = "remove email";
+      user2._id = mongoose.Types.ObjectId('570d88ab95136958181e421f');
+      user2.carSeats = 4;
+      user2.trips = [mongoose.Types.ObjectId('111d88ab95136958181e421f')];
+      user2.save(function(err, data) {
         if (err) throw err;
         done();
       });
@@ -38,28 +63,81 @@ describe('Trip routes', function() {
     });
   });
 
-  it('should search +/- 30 min', function(done) {
-    var tripSearch = {"origin": "origin", "dest": "dest",
-                      "originTime": "07:59 AM", // 29 min under
-                      "destTime": "08:01 PM"}; // 29 min over
+  // it('should search +/- 30 min', function(done) {
+  //   var tripSearch = {"origin": "Bellevue, WA", "dest": "Seattle, WA",
+  //                     "originTime": "07:59 AM", // 29 min under
+  //                     "destTime": "08:01 PM"}; // 29 min over
+  //   chai.request(url)
+  //     .get('/trips')
+  //     .send({tripSearch: tripSearch})
+  //     .end(function(err, res) {
+  //       expect(err).to.eql(null);
+  //       expect(res.body.trips[0].origin).to.not.eql(undefined);
+  //       done();
+  //     });
+  // });
+
+  // it('should search trips by user id', function(done) {
+  //   chai.request(url)
+  //     .get('/trips')
+  //     .send({userEmail: "test email"})
+  //     .end(function(err, res) {
+  //       expect(err).to.eql(null);
+  //       expect(res.body.trips[0].origin).to.not.eql(undefined);
+  //       done();
+  //     });
+  // });
+
+  it('should be able to subscribe to a trip', function(done) {
     chai.request(url)
-      .get('/trips')
-      .send({tripSearch: tripSearch})
+      .put('/trips')
+      .send({tripConfig: {"remove": "false", "userEmail": "test email", "tripId": "111d88ab95136958181e421f"}})
       .end(function(err, res) {
-        expect(err).to.eql(null);
-        expect(res.body.trips[0].origin).to.eql("origin");
-        done();
+        if (err) throw err;
+        User.findOne({email: "test email"}, function(err, user) {
+          expect(err).to.eql(null);
+          expect(user.trips.indexOf('111d88ab95136958181e421f')).to.not.eql(-1);
+          Trip.findOne({_id: '111d88ab95136958181e421f'}, function(err, trip) {
+            expect(err).to.eql(null);
+            expect(trip.travelers.indexOf('560d88ab95136958181e421f')).to.not.eql(-1);
+            done();
+          });
+        });
       });
   });
 
-  it('should search trips by user id', function(done) {
+  it('should be able to unsubscribe to a trip', function(done) {
     chai.request(url)
-      .get('/trips')
-      .send({userEmail: "test email"})
+      .put('/trips')
+      .send({tripConfig: {"remove": "true", "userEmail": "remove email", "tripId": "111d88ab95136958181e421f"}})
       .end(function(err, res) {
-        expect(err).to.eql(null);
-        expect(res.body.trips[0].origin).to.eql("origin");
-        done();
+        if (err) throw err;
+        User.findOne({email: "remove email"}, function(err, user) {
+          expect(err).to.eql(null);
+          expect(user.trips.indexOf('111d88ab95136958181e421f')).to.eql(-1);
+          Trip.findOne({_id: '111d88ab95136958181e421f'}, function(err, trip) {
+            expect(err).to.eql(null);
+            expect(trip.travelers.indexOf('570d88ab95136958181e421f')).to.eql(-1);
+            done();
+          });
+        });
+      });
+  });
+
+  it('should be able to make a new trip', function(done) {
+    chai.request(url)
+      .post('/trips')
+      .send({"trip": {"tripName": "test name", "origin": "Renton, WA",
+                    "originTime": "09:00 AM", "dest": "Everett, WA",
+                    "destTime": "10:00 AM", "weekDays": "mon",
+                    "userEmail": "test email"}}
+            )
+      .end(function(err, res) {
+        Trip.findOne({origin: "Renton, WA"}, function(err, doc) {
+          expect(err).to.eql(null);
+          expect(doc.dest).to.eql("Everett, WA");
+          done();
+        });
       });
   });
 });
