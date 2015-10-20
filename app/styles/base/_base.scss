@@ -2,9 +2,11 @@ li {
   list-style: none;
 }
 
-a {
+a, a:hover, a:visited {
   text-decoration: none;
+  color: black
 }
+
 .banner-imgs {
   overflow: hidden;
   height: 200px;
