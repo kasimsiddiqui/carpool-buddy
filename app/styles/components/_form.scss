@@ -7,7 +7,6 @@
   position: absolute;
   background: #fff;
   font-family: 'Josefin Sans', sans-serif;
-  display: none;
   color: black;
   text-align: center;
   border-radius: 5px;
@@ -28,6 +27,18 @@
     width: 100%;
     text-align: left;
     border: none;
+
+    .form-left {
+      padding-left: 4em;
+      float: left;
+      width: calc(50% - 4em);
+    }
+
+    .form-right {
+      padding-left: 4em;
+      width: calc(50% - 4em);
+      display: inline;
+    }
 
     a {
       font-size: smaller;
@@ -141,14 +152,9 @@
     color: black;
     font-size: 1.5em;
   }
+
+  // .hidden {
+  //   display: none;
+  // }
 }
 
-.form {
-  display: block;
-}
-
-.checkbox_label {
-  display: inline;
-  width: 20%;
-  background-color: orange;
-}
