@@ -16,3 +16,8 @@
 .btn {
   @include button($primary-color-light, $text-light, 2em)
 }
+
+
+.log_in_top {
+  float: right;
+}
