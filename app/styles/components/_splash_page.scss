@@ -1,8 +1,28 @@
 .splash_page {
+  clear: both;
   font-family: 'Josefin Sans', sans-serif;
   text-align: center;
 
   p {
     font-family: 'Josefin Sans', sans-serif;
   }
+
+  @media only screen and (min-width: 320px) {
+    h2 {
+      font-size: 2.75rem;
+    }
+  }
+
+  @media only screen and (min-width: 375px) {
+    h2 {
+      font-size: 3rem;
+    }
+  }
+
+  @media only screen and (min-width: 410px) {
+    h2 {
+      font-size: 4rem;
+    }
+  }
+
 }
