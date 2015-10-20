@@ -4,7 +4,7 @@ footer {
   }
   @include flex-container(flex,row,wrap,center,center,center);
   font-family: 'Josefin Sans', sans-serif;
-  color: $primary-color-light;
+  color: $primary-color;
   font-size: 1.5em;
   border-top: 1px solid $text-dark;
   padding-top: 3em;

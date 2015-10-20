@@ -1,17 +1,21 @@
 .nav {
-  background-color: none;
   h1 {
     color: #000;
     font-size: 1.5em;
-    // padding: 1em;
     text-align: center;
   }
+  ul{
+    padding-left: 0;
+  }
   ul li {
-
+    font-family: 'Josefin Sans', sans-serif;
     display: none;
-    text-align: center;
+    text-align: left;
     padding-bottom: .3em;
     color: #000;
+    a {
+      color: $primary-color;
+    }
   }
   .icon-menu:before {
     padding-left: .5em;
@@ -40,6 +44,7 @@
 
 @media only screen and (min-width: 650px) {
   .nav {
+
     .icon-menu {
       display: none;
     }
@@ -50,20 +55,18 @@
       padding-bottom: .3em;
     }
     ul {
-      position: relative;
-      padding-top: 2em;
-      padding-right: 5em;
+      // position: relative;
+      padding-top: 1.5em;
+      padding-right: .5em;
       padding-bottom: 5em;
-      font-size: .7em;
+      font-size: 1em;
       text-transform: uppercase;
       li {
         padding-left: 1em;
         padding-right: 1em;
         float: right;
         display: inline;
-        span {
-          display: inline;
-        }
+
       }
     }
   }
