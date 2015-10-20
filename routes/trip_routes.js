@@ -5,6 +5,7 @@ var jsonParser = require('body-parser').json();
 var handleError = require(__dirname + '/../lib/handle_error');
 var dateParser = require(__dirname + '/../lib/date_parser');
 var findDistance = require(__dirname + '/../app/js/find_distance');
+var ee = require('events');
 
 var tripsRoute = module.exports = exports = express.Router();
 
@@ -26,19 +27,26 @@ tripsRoute.get('/trips', jsonParser, function(req, res) {
                       {$and: [{"destTime": {$gt: leastTimeDest}},
                               {"destTime": {$lt: mostTimeDest}}
                       ]}
-              ]}, function(err, docs) {
+              ]},
+    function(err, docs) {
       if (err) handleError(err, res, 500);
       destMatch = [];
-      docs.forEach(function(doc) {
-        console.log(findDistance(search.origin, doc.origin));
-        if(findDistance(search.origin, doc.origin) < 5 &&
-           findDistance(search.dest, doc.dest) < 5) {
-          destMatch.push(doc);
-        }
-      });
-
-      res.json({trips: destMatch});
+      docs.forEach(function(doc, index, array) {
+        findDistance(search.origin, doc.origin, function(distance) {
+          if(distance < 5) {
+            findDistance(search.dest, doc.dest, function(distance) {
+              if(distance < 5) {
+                destMatch.push(doc);
+                if (index === array.length -1) {
+                  res.json({trips: destMatch});
+                }
+              }
+            });
+          }
+        });
+      }); 
     });
+    return;
   }
   // Otherwise we are finding all the trips the user is a part of.
   User.findOne({email: req.body.userEmail}, function(err, user) {
@@ -53,6 +61,7 @@ tripsRoute.get('/trips', jsonParser, function(req, res) {
 tripsRoute.post('/trips', jsonParser, function(req, res) {
   var tripInfo = req.body.trip;
   User.findOne({email: req.body.trip.userEmail}, function(err, user) {
+    debugger;
     var trip = new Trip();
     trip.tripName = tripInfo.tripName;
     trip.origin = tripInfo.origin;
@@ -65,6 +74,7 @@ tripsRoute.post('/trips', jsonParser, function(req, res) {
     trip.save(function(err, data) {
       debugger;
       if (err) handleError(err, res, 500);
+      return;
     });
   });
 });

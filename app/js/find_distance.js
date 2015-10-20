@@ -1,4 +1,4 @@
-module.exports = function(location1, location2) {
+module.exports = function(location1, location2, callback) {
   var distance = require('google-distance');
 
   distance.apiKey = process.env.GOOGLE_MAPS_API_KEY;
@@ -9,8 +9,8 @@ module.exports = function(location1, location2) {
       units: 'imperial'
     },
 
-    function(err, data) {
+    function (err, data) {
       if (err) return console.log(err);
-      return data.distance;
+      callback(parseInt(data.distance));
   });
 };
