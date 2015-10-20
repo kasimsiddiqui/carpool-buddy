@@ -3,12 +3,13 @@
   h1 {
     color: #000;
     font-size: 1.5em;
-    padding: 1em;
+    // padding: 1em;
     text-align: center;
   }
   ul li {
+
     display: none;
-    padding-left: .5em;
+    text-align: center;
     padding-bottom: .3em;
     color: #000;
   }
@@ -22,6 +23,20 @@
   display: block;
   }
 }
+.logo-nav{
+  color: $logo-color;
+  border-top: 2px solid $logo-color;
+  border-bottom: 2px solid $logo-color;
+  text-align: center;
+  display: block;
+  font-family: 'Freschezza';
+
+  padding-bottom: .5em;
+  padding-top: .5em;
+  margin-top: .25em;
+  margin-bottom: .25em;
+}
+
 
 @media only screen and (min-width: 650px) {
   .nav {
@@ -30,13 +45,13 @@
     }
     h1 {
       position: absolute;
-      padding-top: 1.9em;
-      padding-left: 1.9em;
-      padding-bottom: 1.9em;
+      padding-top: .5em;
+      padding-left: .3em;
+      padding-bottom: .3em;
     }
     ul {
       position: relative;
-      padding-top: 5em;
+      padding-top: 2em;
       padding-right: 5em;
       padding-bottom: 5em;
       font-size: .7em;
@@ -52,5 +67,8 @@
       }
     }
   }
+  .logo-nav{
+    display: inline;
+}
 
 }
