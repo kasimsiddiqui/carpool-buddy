@@ -4,6 +4,7 @@
 
 The following enviromental variables are suggested for your machine
 
+GOOGLE_MAPS_API_KEY
 APP_SECRET
 MONGODB_URL
 PORT
@@ -61,8 +62,9 @@ POST /api/trip
 
 ```
 req.body.trip = {"tripName": "to work", "origin":"map coordinates", "originTime":"08:00 AM", "dest":"map coordinates",
- "weekDays":"mon, tue, thu, sat", "userId":"9H83TY3H12"}
+ "destTime": "10:00 AM", "weekDays":"mon, tue, thu, sat", "userEmail":"example@test.com"}
 ```
 
 DELETE /api/trip
-  takes a trip id on req.body.tripId and deletes that trip object from the database
+  takes a trip id on req.body.tripId and deletes that trip object from the database.
+  returns 'success' on res.body.msg.
