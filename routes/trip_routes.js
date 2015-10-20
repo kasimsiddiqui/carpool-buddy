@@ -44,7 +44,7 @@ tripsRoute.get('/trips', jsonParser, function(req, res) {
             });
           }
         });
-      }); 
+      });
     });
     return;
   }
@@ -61,7 +61,6 @@ tripsRoute.get('/trips', jsonParser, function(req, res) {
 tripsRoute.post('/trips', jsonParser, function(req, res) {
   var tripInfo = req.body.trip;
   User.findOne({email: req.body.trip.userEmail}, function(err, user) {
-    debugger;
     var trip = new Trip();
     trip.tripName = tripInfo.tripName;
     trip.origin = tripInfo.origin;
@@ -72,9 +71,28 @@ tripsRoute.post('/trips', jsonParser, function(req, res) {
     trip.travelers = [user._id];
     trip.seatsLeft = user.carSeats -1;
     trip.save(function(err, data) {
-      debugger;
       if (err) handleError(err, res, 500);
+      res.send(data);
+    });
+  });
+});
+
+tripsRoute.put('/trips', jsonParser, function(req, res) {
+  var config = req.body.tripConfig;
+  User.findOne({email: config.userEmail}, function(err, user) {
+    if (err) handleError(err, res, 500);
+    if(config.remove === 'true') {
+      User.update({_id: user._id}, {$pull: {trips: config.tripId}}, function() {
+        Trip.update({_id: config.tripId}, {$pull: {travelers: user._id}}, function() {
+          res.send({msg: 'success'});
+        });
+      });
       return;
+    }
+    User.update({_id: user._id}, {$push: {trips: config.tripId}}, function() {
+      Trip.update({_id: config.tripId}, {$push: {travelers: user._id}}, function() {
+        res.send({msg: 'success'});
+      });
     });
   });
 });
