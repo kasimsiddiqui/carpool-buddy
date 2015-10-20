@@ -44,7 +44,7 @@
       </section>
 
       <section>
-        <h2>Find a Trip <span id="find-trip-expand">+</span></h2>
+        <h2>Find a Trip <span class="expand" id="find-trip-expand">+</span></h2>
         <form id="find-trip-form" class="form hidden">
           <fieldset>
             <label for="find-origin">Where to Start?</label>
@@ -60,12 +60,12 @@
             <label><input type="checkbox" value="sun"/>Sunday</label>
             <label><input type="checkbox" value="tue" checked="true"/>Tuesday</label>
             <label><input type="checkbox" value="thu" checked="true"/>Thursday</label>
-            <label><input type="checkbox" value="sat" checked="true"/>Saturday</label>
+            <label><input type="checkbox" value="sat"/>Saturday</label>
           </fieldset>
           <fieldset class="form-right">
             <label><input type="checkbox" value="mon" checked="true"/>Monday</label>
             <label><input type="checkbox" value="wed" checked="true"/>Wednesday</label>
-            <label><input type="checkbox" value="fri"/>Friday</label>
+            <label><input type="checkbox" value="fri" checked="true"/>Friday</label>
           </fieldset>
             <button type="submit">Submit</login>
           </fieldset>
@@ -73,18 +73,41 @@
       </section>
 
       <section>
-        <h2>Create A Trip</h2>
-        <p>Form Goes Here Inputs are</p>
-        <p>Origin</p>
-        <p>Destination</p>
-        <p>Time</p>
-        <p>Days</p>
+        <h2>Create A Trip <span class="expand" id="create-trip-expand">+</span></h2>
+
+        <form id="create-trip-form" class="form hidden">
+          <fieldset>
+            <label for="create-origin">Where to Start?</label>
+            <input type="text" name="create-origin" id="create-origin" spellcheck="false" />
+
+            <label for="create-destination">Where to Go?</label>
+            <input type="text" name="create-destination" id="create-destination" spellcheck="false" />
+
+            <label for="create-time">What Time to Go?</label>
+            <input type="time" name="create-time" id="create-time" spellcheck="false" />
+            <label for="create-days">What Days to Go?</label>
+           <fieldset class="form-left">
+            <label><input type="checkbox" value="sun"/>Sunday</label>
+            <label><input type="checkbox" value="tue" checked="true"/>Tuesday</label>
+            <label><input type="checkbox" value="thu" checked="true"/>Thursday</label>
+            <label><input type="checkbox" value="sat"/>Saturday</label>
+          </fieldset>
+          <fieldset class="form-right">
+            <label><input type="checkbox" value="mon" checked="true"/>Monday</label>
+            <label><input type="checkbox" value="wed" checked="true"/>Wednesday</label>
+            <label><input type="checkbox" value="fri" checked="true"/>Friday</label>
+          </fieldset>
+            <button type="submit">Submit</login>
+          </fieldset>
+        </form>
       </section>
 
       <section>
         <h2>Delete a Trip</h2>
-        <p>Form Goes Here Inputs are</p>
-        <p>Name of Trip</p>
+        <ul>
+          <li>{{ trip }} <span class="delete" id="find-trip-expand">-</span></li>
+        </ul>
+
       </section>
 
     <footer>
