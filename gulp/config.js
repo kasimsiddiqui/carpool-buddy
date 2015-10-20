@@ -15,18 +15,18 @@ module.exports = {
       indentedSyntax: true, // Enable .sass syntax!
     }
   },
-  // fonts: {
-  //     src: src + '/styles/fonts/*',
-  //     dest: dest + "/styles/fonts/",
-  //     extensions: ['woff2', 'woff', 'eot', 'ttf', 'svg']
-  // },
-  index: {
-    src: src + "/index.html",
-    dest: dest
+  fonts: {
+      src: src + '/styles/fonts/*',
+      dest: dest + "/styles/fonts/",
+      extensions: ['woff2', 'woff', 'eot', 'ttf', 'svg']
   },
+  // index: {
+  //   src: src + "/index.html",
+  //   dest: dest
+  // },
   html: {
-    src: src + "/app/**/*.html",
-    dest: dest + "/views/"
+    src: src + "/**/*.html",
+    dest: dest
   },
   server: {
     src: dest,
