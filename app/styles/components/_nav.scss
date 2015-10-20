@@ -1,4 +1,4 @@
-header {
+.nav {
   background-color: none;
   h1 {
     color: #000;
@@ -24,7 +24,7 @@ header {
 }
 
 @media only screen and (min-width: 650px) {
-  header {
+  .nav {
     .icon-menu {
       display: none;
     }
