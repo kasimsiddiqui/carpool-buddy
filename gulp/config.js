@@ -28,6 +28,11 @@ module.exports = {
     src: src + "/**/*.html",
     dest: dest
   },
+  images: {
+    src: src + '/imgs/*',
+    dest: dest + '/imgs/',
+    extensions: ['jpg', 'png', 'svg', 'gif']
+  },
   server: {
     src: dest,
     livereload: false,
