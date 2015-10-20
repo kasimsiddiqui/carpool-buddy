@@ -1,14 +1,11 @@
 li {
-  list-style: none;
+ list-style: none;
 }
 
-a, a:hover, a:visited {
-  text-decoration: none;
-  color: black
+a {
+ text-decoration: none;
+ color: $primary-color-light;
 }
-
-.banner-imgs {
-  overflow: hidden;
-  height: 200px;
-  width: 100%;
+.hidden {
+  display: none;
 }
