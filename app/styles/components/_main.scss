@@ -46,14 +46,6 @@
 //     border-bottom: 1px solid black;
 //   }
 // }
-
-
-.content{
-  @include flex-container(flex,row,nowrap,center,center,center);
-  h3{
-    padding-right: 5%;
-  }
-}
 .hide {
   display: none;
 }
@@ -62,4 +54,23 @@
     -webkit-transform: rotate(180deg);
     -moz-transform: rotate(180deg);
     -ms-transform: rotate(180deg);
+}
+
+.content{
+  @include flex-container(flex,row,nowrap,center,center,center);
+  h3{
+    padding-right: 30%;
+  }
+}
+@media only screen and (min-width: 650px) {
+  .main-content{
+  overflow: auto;
+  }
+  .main-filters{
+    position: fixed;
+    position: clearfix;
+  }
+  .main-trips{
+    @include flex-container(flex,column,nowrap,flex-start,center,center);
+  }
 }
