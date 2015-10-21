@@ -11,6 +11,7 @@
   @extend .expand_delete;
   margin-right: 0;
   margin-bottom: 5px;
+  background-color: $logo-color;
 }
 
 
@@ -50,5 +51,7 @@
   @extend .expand_delete;
   margin-right: 0;
 }
-
+.hide {
+  display: none;
+}
 
