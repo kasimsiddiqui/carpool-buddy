@@ -10,30 +10,35 @@
     <link rel="stylesheet" href="/styles/main.css">
   </head>
   <body>
-    <header class="nav">
-    <h1 class="logo">Car Pool Buddy</h1>
-      <section>
 
-        <nav>
-          <label for="show-menu">
-            <span class="icon-menu"></span>
-          <input type="checkbox" id="show-menu">
-          <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">All Trips</a></li>
-            <li><a href="#">Create Trips</a></li>
-            <li><a href="#">Edit Trips</a></li>
-          </ul>
-        </nav>
+    <header>
+      <section class="nav">
+        <div class="header-nav">
+          <div>
+            <h1 class="logo-nav">Car Pool Buddy</h1>
+          </div>
+          <nav>
+            <label for="show-menu">
+              <span class="icon-menu"></span>
+            <input type="checkbox" id="show-menu">
+            <ul>
+              <!-- <li><a href="#"></a></li> -->
+              <li><a href="#">All Trips</a></li>
+              <li><a href="#">Create Trips</a></li>
+              <li><a href="#">Edit Trips</a></li>
+            </ul>
+          </nav>
+        </div>
       </section>
     </header>
-
     <main>
+
       <section class="trip_info">
         <h2>My Trips</h2>
-        <ul>
+
+        <h3>{{ trip. }}<span class="trip_detail_expand" id="trips-1" >+</span></h3>
+        <ul id="trips-details-1">
           <li ng-repeat="trip in trips">
-            <h3>{{ trip. }}<span class="trip_detail_expand" id="create-trip-expand">+</span></h3>
             <p>{{ trip.origin }}</p>
             <p>{{ trip.destination }}</p>
             <p>{{ trip.time }}</p>
@@ -42,6 +47,8 @@
             <p>{{ trip.users.email (click to see) }}</p>
           </li>
         </ul>
+
+
       </section>
 
       <section>
@@ -107,17 +114,18 @@
         <h2>Delete a Trip</h2>
         <ul ng-repeat="trip in trips">
           <li>{{ trip.name }}<span class="delete" id="find-trip-expand" ng-click="vm.delete(vm.file.id)">-</span></li>
-        </ul>
-
+   <!--      <div class="home">
+          <a href="#"><span>^</span></a>
+        </div> -->
       </section>
 
     <footer>
       <p class="footer">&#169 Carpool Buddy LLC</p>
       <ul>
-        <li><span class="icon-facebook2"></span></li>
-        <li><span class="icon-twitter"></span></li>
-        <li><span class="icon-pinterest2"></span></li>
-        <li><span class="icon-github"></span></li>
+        <li class="footer"><a href="https://www.facebook.com/"><span class="icon-facebook2"></a></span></li>
+        <li class="footer"><a href="https://www.twitter.com/"><span class="icon-twitter"></span></a></li>
+        <li class="footer"><a href="https://www.pinterest.com/"><span class="icon-pinterest2"></span></a></li>
+        <li class="footer"><a href="https://www.github.com/"><span class="icon-github"></span></a></li>
       </ul>
     </footer>
 
