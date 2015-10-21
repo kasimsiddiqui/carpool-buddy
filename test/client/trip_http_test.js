@@ -14,18 +14,19 @@ describe('trips controller', function() {
   }));
 
   it('should be able to create a controller', function() {
-    var controller = new $ControllerConstructor('NotesController', {$scope: $scope});
+    var controller = new $ControllerConstructor('TripsController', {$scope: $scope});
     expect(typeof $scope).toBe('object');
     expect(typeof controller).toBe('object');
-    expect(Array.isArray($scope.notes)).toBe(true);
+    expect(Array.isArray($scope.trips)).toBe(true);
   });
 
   describe('REST requests', function() {
-    beforeEach(angular.mock.inject(function(_$httpBackend_, #rootScope) {
+    beforeEach(angular.mock.inject(function(_$httpBackend_, $rootScope) {
       $httpBackend = _$httpBackend_;
       $scope = $rootScope.$new();
-      $ControllerConstructor('TripsController', {$scope, $scope});
+      $ControllerConstructor('TripsController', {$scope: $scope});
     }));
+
 
     afterEach(function() {
       $httpBackend.verifyNoOutstandingExpectation();
@@ -33,7 +34,7 @@ describe('trips controller', function() {
     });
 
     it('should be able to make a get request to get users trips', function(done) {
-      $httpBackend.expectGET('/api/notes').respond(200, [{"origin": "WA"}]);
+      $httpBackend.expectGET('/api/trips').respond(200, [{"origin": "WA"}]);
       $scope.getMyTrips();
       expect($scope.trips[0].origin).toBe('WA');
     });
