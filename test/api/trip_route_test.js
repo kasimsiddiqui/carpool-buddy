@@ -26,11 +26,19 @@ describe('Trip routes', function() {
       user.email = "test email";
       user._id = mongoose.Types.ObjectId('560d88ab95136958181e421f');
       user.carSeats = 4;
-      user.save(function(err, data) {
+      user.basic.email = 'test email';
+      user.generateHash('foobar123', function(err, res) {
         if (err) throw err;
-        done();
-      });
-    });
+        user.save(function(err, data) {
+          if (err) throw err;
+          user.generateToken(function(err, token) {
+            if (err) throw err;
+            this.token = token;
+            done();
+          }.bind(this));
+        }.bind(this));
+      }.bind(this));
+    }.bind(this));
   });
 
   before(function(done) {
@@ -69,7 +77,8 @@ describe('Trip routes', function() {
                       "destTime": "08:01 PM"}; // 29 min over
     tripSearch = JSON.stringify(tripSearch);
     chai.request(url)
-      .get('/trips/id/' + tripSearch)
+      .get('/trips/' + tripSearch)
+      .set('token', this.token)
       .end(function(err, res) {
         expect(err).to.eql(null);
         expect(res.body.trips[0].origin).to.not.eql(undefined);
@@ -78,8 +87,10 @@ describe('Trip routes', function() {
   });
 
   it('should search trips by user id', function(done) {
+    
     chai.request(url)
-      .get('/trips/560d88ab95136958181e421f')
+      .get('/trips')
+      .set('token', this.token)
       .end(function(err, res) {
         expect(err).to.eql(null);
         expect(res.body.trips[0].origin).to.not.eql(undefined);

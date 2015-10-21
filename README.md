@@ -30,12 +30,14 @@ GET /api/signin
 
 ### Trip Routes
 
-GET /api/trip/:userId/:stringifiedSearchObject
-  if only a userID is given it returns an array of trip objects that the user is 
+GET /api/trips
+
+  returns an array of trip objects that the user is 
   a part of on res.body.trips
 
-  if there is also a stringigiedSearchObject then search results will
-  be returned for the search view. The trip search object should have a
+GET /api/trips/:stringifiedSearchObject
+
+  search results will be returned for the search view. The trip search object should have a
   orgin, originTime, dest, and destTime, weekDays. It should look like:
 
 ```
@@ -57,13 +59,13 @@ res {
 }
 ```
 
-POST /api/trip
+POST /api/trips
   creates a trip entry in the database. Needs a JSON object
   attached to req.body.trip with the trip origin, originTime, dest,
   destTime, weekDays, map, and userId. it should look like:
 
 ```
-req.body.trip = {"tripName": "to work", "origin":"map coordinates", "originTime":"08:00 AM", "dest":"map coordinates",
+req.body.trips = {"tripName": "to work", "origin":"map coordinates", "originTime":"08:00 AM", "dest":"map coordinates",
  "destTime": "10:00 AM", "weekDays":"mon, tue, thu, sat", "userEmail":"example@test.com"}
 ```
 

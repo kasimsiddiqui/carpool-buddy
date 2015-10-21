@@ -9,7 +9,7 @@
 
     <link rel="stylesheet" href="/styles/main.css">
   </head>
-  <body>
+  <body data-ng-app="carpoolApp">
 
     <header>
       <section class="nav">
@@ -31,9 +31,9 @@
         </div>
       </section>
     </header>
-    <main>
+    <main data-ng-controller="TripsController">
 
-      <section class="trip_info">
+      <section class="trip_info" data-ng-init="getMyTrips()">
         <h2>My Trips</h2>
 
         <h3>{{ trip. }}<span class="trip_detail_expand" id="trips-1" >+</span></h3>
