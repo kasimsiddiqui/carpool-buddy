@@ -1,19 +1,35 @@
 footer {
   p {
+    font-size: .7em;
     padding-bottom: 1em;
   }
-  @include flex-container(flex,row,wrap,center,center,center);
-  font-size: .4em;
-  border-top: 1px solid black;
-  padding-top: 3em;
+  @include flex-container(flex,row,nowrap,center,center,center);
+  font-family: 'Josefin Sans', sans-serif;
+  color: $primary-color;
+  font-size: 1em;
+  padding-top: 2em;
   ul {
+    padding-left: 5%;
     padding-bottom: 1em;
     text-align: center;
     text-transform: uppercase;
   }
   li {
-    padding-left: 2em;
-    padding-right: 2em;
+    padding-left: .5em;
+    padding-right: .5em;
     display: inline;
   }
+}
+@media only screen and (min-width: 650px) {
+  footer{
+    p {
+      font-size: 1.5em;
+    }
+    li{
+      font-size: 1.5em;
+    }
+  }
+}
+.home {
+  right: 0;
 }
