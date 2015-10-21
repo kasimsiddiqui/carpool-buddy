@@ -1,15 +1,19 @@
 var mongoose = require('mongoose');
+var ObjectId = mongoose.Schema.ObjectId;
 var bcrypt = require('bcrypt');
 var eat = require('eat');
 
 var userSchema = new mongoose.Schema({
+  name: String,
   email: {type: String, unique: true},
   basic: {
     email: String,
     password: String
   },
-  carSeats: {type: 32-bit integer},
-  trips: [{type: Object id}]
+
+  name: String,   //public name that user creates
+  carSeats: {type: Number, default: 0}, //if 0, then they don't have a car
+  trips: [ObjectId] //array of trips the user is signed up with
 });
 
 userSchema.methods.generateHash = function(password, callback) {
