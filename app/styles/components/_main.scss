@@ -47,9 +47,12 @@
 //   }
 // }
 
-.trip_detail_expand {
-  @extend .expand_delete;
-  margin-right: 0;
+
+.content{
+  @include flex-container(flex,row,nowrap,center,center,center);
+  h3{
+    padding-right: 5%;
+  }
 }
 .hide {
   display: none;

@@ -36,7 +36,10 @@
 
       <section class="trip_info">
         <h2 id="all">All Trips</h2>
-        <h3 >{{ trip. }}<span class="trip_detail_expand" id="trips-1">&#8595</span></h3>
+        <div class="content">
+          <h3 >{{ trip. }}</h3>
+          <span class="expand_delete" id="trips-1">&#8595</span>
+        </div>
         <ul id="trips-details-1" class="hide">
           <li ng-repeat="trip in trips">
             <p>{{ trip.origin }}</p>
@@ -48,7 +51,10 @@
           </li>
         </ul>
 
-        <h3>{{ trip. }}<span class="trip_detail_expand" id="trips-2" >&#8595</span></h3>
+        <div class="content">
+          <h3>{{ trip. }}</h3>
+          <span class="expand_delete" id="trips-2" >&#8595</span>
+        </div>
         <ul id="trips-details-2" class="hide">
           <li ng-repeat="trip in trips">
             <p>{{ trip.origin }}</p>
@@ -122,11 +128,24 @@
 
       <section class="trip_info">
         <h2 id="delete">Delete a Trip</h2>
-        <ul ng-repeat="trip in trips">
-          <li>{{ trip.name }}<span class="delete" id="find-trip-expand" ng-click="vm.delete(vm.file.id)">-</span></li>
+        <div class="content">
+          <ul ng-repeat="trip in trips">
+            <p>{{ trip.name }}</p>
+          </ul>
+          <span class="delete" id="find-trip-expand" ng-click="vm.delete(vm.file.id)">-</span>
+        </div>
+        <div class="content">
+          <ul ng-repeat="trip in trips">
+            <p>{{ trip.name }}</p>
+          </ul>
+          <span class="delete" id="find-trip-expand" ng-click="vm.delete(vm.file.id)">-</span>
+        </div>
+
    <!--      <div class="home">
           <a href="#"><span>^</span></a>
         </div> -->
+
+
       </section>
 
     <footer>
