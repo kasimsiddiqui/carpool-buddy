@@ -2,12 +2,11 @@ var dest = "./public";
 var src = './app';
 
 module.exports = {
-  // javascript: {
-  //   src: src + '/js/**/*.js',
-  //   dest: dest + '/js/',
-  //   entryPoint: src + '/app/entry.js',
-  //   packedFile: 'packed.js'
-  // },
+  javascript: {
+    src: src + '/js/client.js',
+    dest: dest + '/',
+    packedFile: 'bundle.js'
+  },
   sass: {
     src: src + "/styles/**/*.{sass,scss}",
     dest: dest + '/styles/',
