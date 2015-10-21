@@ -36,8 +36,20 @@
       <section class="trip_info">
         <h2>My Trips</h2>
 
-        <h3>{{ trip. }}<span class="trip_detail_expand" id="trips-1" >+</span></h3>
+        <h3>{{ trip. }}<span class="trip_detail_expand" id="trips-1">&#8595</span></h3>
         <ul id="trips-details-1" class="hide">
+          <li ng-repeat="trip in trips">
+            <p>{{ trip.origin }}</p>
+            <p>{{ trip.destination }}</p>
+            <p>{{ trip.time }}</p>
+            <p>{{ trip.days }}</p>
+            <p>{{ trip.users }}</p>
+            <p>{{ trip.users.email (click to see) }}</p>
+          </li>
+        </ul>
+
+        <h3>{{ trip. }}<span class="trip_detail_expand" id="trips-2" >&#8595</span></h3>
+        <ul id="trips-details-2" class="hide">
           <li ng-repeat="trip in trips">
             <p>{{ trip.origin }}</p>
             <p>{{ trip.destination }}</p>
@@ -127,7 +139,6 @@
       </ul>
     </footer>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/jquery-2.1.4.min.js"><\/script>')</script>
     <script type="text/javascript" src="js/jquery.leanModal.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
