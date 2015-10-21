@@ -31,23 +31,25 @@
         </div>
       </section>
     </header>
-    <main data-ng-controller="TripsController">
+    <main data-ng-controller="TripsController" data-ng-init="getMyTrips()">
 
-      <section class="trip_info" data-ng-init="getMyTrips()">
+      <section class="trip_info">
         <h2>My Trips</h2>
 
-        <h3>{{ trip. }}<span class="trip_detail_expand" id="trips-1" >+</span></h3>
-        <ul id="trips-details-1">
-          <li ng-repeat="trip in trips">
-            <p>{{ trip.origin }}</p>
-            <p>{{ trip.destination }}</p>
-            <p>{{ trip.time }}</p>
-            <p>{{ trip.days }}</p>
-            <p>{{ trip.users }}</p>
-            <p>{{ trip.users.email (click to see) }}</p>
-          </li>
-        </ul>
-
+        <section ng-repeat="trip in trips">
+          <h3>{{ trip.tripName }}<span class="trip_detail_expand" id="trips-1" >+</span></h3>
+          <ul id="trips-details-1">
+            <li>
+              <p>{{ trip.origin }}</p>
+              <p>{{ trip.dest }}</p>
+              <p>{{ trip.originTime }}</p>
+              <p>{{ trip.destTime}}</p>
+              <p>{{ trip.weekDays }}</p>
+              <p>{{ trip.travelers }}</p>
+              <p>{{ trip.seatsLeft (click to see) }}</p>
+            </li>
+          </ul>
+        </section>
 
       </section>
 
