@@ -1,20 +1,29 @@
-.expand,
-.delete {
+.expand_delete{
   cursor: pointer;
   background-color: $primary-color-light;
   padding: .25rem .65rem;
-  border-radius: 0px;
+  border-radius: 3px;
   font-size: 1.25rem;
+  float: right;
 }
 
 .delete {
-  float: right;
+  @extend .expand_delete;
   margin-right: 0;
   margin-bottom: 5px;
 }
 
 .expand {
-  float: right;
+  @extend .expand_delete;
   margin-right: calc(90% - 200px);
+}
+
+.trip_detail_expand {
+  @extend .expand_delete;
+  margin-right: 0;
+}
+
+section {
+  border-bottom: 1px solid #eee;
 }
 

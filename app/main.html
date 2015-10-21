@@ -29,18 +29,19 @@
     </header>
 
     <main>
-      <section>
+      <section class="trip_info">
         <h2>My Trips</h2>
-        <p>A List of Trips</p>
-
-        <h3>Trip Example</h3>
-        <p>Origin</p>
-        <p>Destination</p>
-        <p>Time</p>
-        <p>Days</p>
-        <p>CarPoolBuddies</p>
-        <p>Name</p>
-        <p>Email (click to see)</p>
+        <ul>
+          <li ng-repeat="trip in trips">
+            <h3>{{ trip. }}<span class="trip_detail_expand" id="create-trip-expand">+</span></h3>
+            <p>{{ trip.origin }}</p>
+            <p>{{ trip.destination }}</p>
+            <p>{{ trip.time }}</p>
+            <p>{{ trip.days }}</p>
+            <p>{{ trip.users }}</p>
+            <p>{{ trip.users.email (click to see) }}</p>
+          </li>
+        </ul>
       </section>
 
       <section>
@@ -102,12 +103,10 @@
         </form>
       </section>
 
-      <section class="trip_delete">
+      <section class="trip_info">
         <h2>Delete a Trip</h2>
-        <ul>
-          <li>Seattle -> Bellevue<span class="delete" id="find-trip-expand">-</span></li>
-          <li>Paris -> Milan<span class="delete" id="find-trip-expand">-</span></li>
-          <li>Moscow -> Federal Way<span class="delete" id="find-trip-expand">-</span></li>
+        <ul ng-repeat="trip in trips">
+          <li>{{ trip.name }}<span class="delete" id="find-trip-expand" ng-click="vm.delete(vm.file.id)">-</span></li>
         </ul>
 
       </section>
@@ -127,10 +126,6 @@
     <script type="text/javascript" src="js/jquery.leanModal.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
 
-    <!--
-    <script src="js/plugins.js"></script>
-    <script src="js/main.js"></script>
-  -->
   </body>
 </html>
 
