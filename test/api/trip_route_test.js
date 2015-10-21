@@ -26,6 +26,7 @@ describe('Trip routes', function() {
       user.email = "test email";
       user._id = mongoose.Types.ObjectId('560d88ab95136958181e421f');
       user.carSeats = 4;
+      user.trips = [mongoose.Types.ObjectId('421d88ab95136958181e421f')];
       user.basic.email = 'test email';
       user.generateHash('foobar123', function(err, res) {
         if (err) throw err;
@@ -49,18 +50,10 @@ describe('Trip routes', function() {
     trip2.dest = "Seattle, WA";
     trip2.originTime = 8 * 1000 * 60 * 60;
     trip2.destTime = 20 * 1000 * 60 * 60;
-    trip2.travelers = [mongoose.Types.ObjectId('570d88ab95136958181e421f')];
+    trip2.travelers = [mongoose.Types.ObjectId('560d88ab95136958181e421f')];
     trip2.save(function(err, data) {
       if (err) throw err;
-      var user2 = new User();
-      user2.email = "remove email";
-      user2._id = mongoose.Types.ObjectId('570d88ab95136958181e421f');
-      user2.carSeats = 4;
-      user2.trips = [mongoose.Types.ObjectId('111d88ab95136958181e421f')];
-      user2.save(function(err, data) {
-        if (err) throw err;
-        done();
-      });
+      done();
     });
   });
 
@@ -101,6 +94,7 @@ describe('Trip routes', function() {
   it('should be able to subscribe to a trip', function(done) {
     chai.request(url)
       .put('/trips')
+      .set('token', this.token)
       .send({tripConfig: {"remove": "false", "userEmail": "test email", "tripId": "111d88ab95136958181e421f"}})
       .end(function(err, res) {
         if (err) throw err;
@@ -119,10 +113,11 @@ describe('Trip routes', function() {
   it('should be able to unsubscribe to a trip', function(done) {
     chai.request(url)
       .put('/trips')
-      .send({tripConfig: {"remove": "true", "userEmail": "remove email", "tripId": "111d88ab95136958181e421f"}})
+      .set('token', this.token)
+      .send({tripConfig: {"remove": "true", "tripId": "111d88ab95136958181e421f"}})
       .end(function(err, res) {
         if (err) throw err;
-        User.findOne({email: "remove email"}, function(err, user) {
+        User.findOne({email: "test email"}, function(err, user) {
           expect(err).to.eql(null);
           expect(user.trips.indexOf('111d88ab95136958181e421f')).to.eql(-1);
           Trip.findOne({_id: '111d88ab95136958181e421f'}, function(err, trip) {
@@ -137,6 +132,7 @@ describe('Trip routes', function() {
   it('should be able to make a new trip', function(done) {
     chai.request(url)
       .post('/trips')
+      .set('token', this.token)
       .send({"trip": {"tripName": "test name", "origin": "Renton, WA",
                     "originTime": "09:00 AM", "dest": "Everett, WA",
                     "destTime": "10:00 AM", "weekDays": "mon",
