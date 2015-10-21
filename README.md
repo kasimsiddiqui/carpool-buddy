@@ -30,19 +30,21 @@ GET /api/signin
 
 ### Trip Routes
 
-GET /api/trip
-  if a req.body.userEmail is given it returns an array of trip objects that the user is 
+GET /api/trip/:userId/:stringifiedSearchObject
+  if only a userID is given it returns an array of trip objects that the user is 
   a part of on res.body.trips
 
-  if there is also a req.body.tripSearch object then search results will
+  if there is also a stringigiedSearchObject then search results will
   be returned for the search view. The trip search object should have a
   orgin, originTime, dest, and destTime, weekDays. It should look like:
 
 ```
-req.body.tripSearch = {"origin": "map coordinates", "originTime": "08:00 AM",
-                       "dest": "map coordinates", "destTime": "10:00 PM",
-                       "weekDays": "mon, tue, thu"}
+{"origin": "map coordinates", "originTime": "08:00 AM",
+ "dest": "map coordinates", "destTime": "10:00 PM",
+ "weekDays": "mon, tue, thu"}
 ```
+
+  Make sure the object is stringified before you send it!
   
   the return will look like:
 ```
