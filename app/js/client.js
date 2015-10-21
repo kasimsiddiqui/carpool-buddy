@@ -6,4 +6,4 @@ require('angular-cookies');
 
 var carpoolApp = angular.module('carpoolApp', []);
 
-require('./users/entry');
+require('./users/entry')(carpoolApp);
