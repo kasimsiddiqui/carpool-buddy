@@ -23,9 +23,10 @@
             <input type="checkbox" id="show-menu">
             <ul>
               <!-- <li><a href="#"></a></li> -->
-              <li><a href="#">All Trips</a></li>
-              <li><a href="#">Create Trips</a></li>
-              <li><a href="#">Edit Trips</a></li>
+              <li><a href="#all">All Trips</a></li>
+              <li><a href="#find">Find Trips</a></li>
+              <li><a href="#create">Create Trips</a></li>
+              <li><a href="#delete">Delete Trips</a></li>
             </ul>
           </nav>
         </div>
@@ -34,9 +35,8 @@
     <main>
 
       <section class="trip_info">
-        <h2>My Trips</h2>
-
-        <h3>{{ trip. }}<span class="trip_detail_expand" id="trips-1">&#8595</span></h3>
+        <h2 id="all">All Trips</h2>
+        <h3 >{{ trip. }}<span class="trip_detail_expand" id="trips-1">&#8595</span></h3>
         <ul id="trips-details-1" class="hide">
           <li ng-repeat="trip in trips">
             <p>{{ trip.origin }}</p>
@@ -62,7 +62,7 @@
       </section>
 
       <section>
-        <h2>Find a Trip <span class="expand" id="find-trip-expand">+</span></h2>
+        <h2 id="find">Find a Trip <span class="expand" id="find-trip-expand">+</span></h2>
         <form id="find-trip-form" class="form hidden">
           <fieldset>
             <label for="find-origin">Where to Start?</label>
@@ -91,7 +91,7 @@
       </section>
 
       <section>
-        <h2>Create A Trip <span class="expand" id="create-trip-expand">+</span></h2>
+        <h2 id="create">Create A Trip <span class="expand" id="create-trip-expand">+</span></h2>
 
         <form id="create-trip-form" class="form hidden">
           <fieldset>
@@ -121,7 +121,7 @@
       </section>
 
       <section class="trip_info">
-        <h2>Delete a Trip</h2>
+        <h2 id="delete">Delete a Trip</h2>
         <ul ng-repeat="trip in trips">
           <li>{{ trip.name }}<span class="delete" id="find-trip-expand" ng-click="vm.delete(vm.file.id)">-</span></li>
    <!--      <div class="home">
