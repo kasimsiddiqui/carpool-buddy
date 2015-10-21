@@ -10,37 +10,81 @@
     <link rel="stylesheet" href="/styles/main.css">
   </head>
   <body>
-    <header class="nav">
-
-      <section>
-        <h1>Carpool Buddy</h1>
-        <nav>
-          <label for="show-menu">
-            <span class="icon-menu"></span>
-          <input type="checkbox" id="show-menu">
-          <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">All Trips</a></li>
-            <li><a href="#">Create Trips</a></li>
-            <li><a href="#">Edit Trips</a></li>
-          </ul>
-        </nav>
+    <header>
+      <section class="nav">
+        <div class="header-nav">
+          <div>
+            <h1 class="logo-nav">Car Pool Buddy</h1>
+          </div>
+          <nav>
+            <label for="show-menu">
+              <span class="icon-menu"></span>
+            <input type="checkbox" id="show-menu">
+            <ul>
+              <!-- <li><a href="#"></a></li> -->
+              <li><a href="#">All Trips</a></li>
+              <li><a href="#">Create Trips</a></li>
+              <li><a href="#">Edit Trips</a></li>
+            </ul>
+          </nav>
+        </div>
       </section>
     </header>
-
     <main>
-      <section>
-        <h2>My Trips</h2>
-        <p>A List of Trips</p>
-
-        <h3>Trip Example</h3>
-        <p>Origin</p>
-        <p>Destination</p>
-        <p>Time</p>
-        <p>Days</p>
-        <p>CarPoolBuddies</p>
-        <p>Name</p>
-        <p>Email (click to see)</p>
+      <section class="main-content">
+        <h1> Current Trips</h1>
+        <div class="trips-rows">
+          <h2 id="trips-1"><a href="#">Pike Place</a></h2>
+          <div id="trips-details-1" class="trips-p">
+            <p>45th and Wallingford</p>
+            <p>8:00am</p>
+            <p>1st and Pike</p>
+            <p>8:30</p>
+            <p>Mon, Tues, Wed, Thur</p>
+            <p>Steve, Jeff, Jill</p>
+          </div>
+        </div>
+        <div class="trips-rows">
+          <h2 id="trips-2"><a href="#">Downtown</a></h2>
+          <div id="trips-details-2" class="trips-p">
+            <p>Shoreline and 99</p>
+            <p>7:00am</p>
+            <p>Boren and Mercer</p>
+            <p>8:00</p>
+            <p> Tues, Wed, Thur</p>
+            <p>Anthony, Alex</p>
+          </div>
+        </div>
+        <div class="trips-rows">
+          <h2 id="trips-2"><a href="#">Downtown</a></h2>
+          <div id="trips-details-2" class="trips-p">
+            <p>Shoreline and 99</p>
+            <p>7:00am</p>
+            <p>Boren and Mercer</p>
+            <p>8:00</p>
+            <p> Tues, Wed, Thur</p>
+            <p>Anthony, Alex</p>
+          </div>
+        </div>
+        <div class="trips-rows">
+          <h2 id="trips-2"><a href="#">Downtown</a></h2>
+          <div id="trips-details-2" class="trips-p">
+            <p>Shoreline and 99</p>
+            <p>7:00am</p>
+            <p>Boren and Mercer</p>
+            <p>8:00</p>
+            <p> Tues, Wed, Thur</p>
+            <p>Anthony, Alex</p>
+          </div>
+        </div>
+          <!-- <h1>{{Trip Name}}</h1>
+          <p>{{origin}}</p>
+          <p>{{originTime}}</p>
+          <p>{{dest}}</p>
+          <p>{{destTime | time}}</p>
+          <p>{{weekDays}}</p>
+          <p>{{map}}</p>
+          <p>{{travelers}}</p> -->
       </section>
 
       <section>
@@ -108,19 +152,20 @@
           <li>Seattle -> Bellevue<span class="delete" id="find-trip-expand">-</span></li>
           <li>Paris -> Milan<span class="delete" id="find-trip-expand">-</span></li>
           <li>Moscow -> Federal Way<span class="delete" id="find-trip-expand">-</span></li>
-
-
         </ul>
 
+        <div class="home">
+          <a href="#"><span>^</span></a>
+        </div>
       </section>
 
     <footer>
       <p class="footer">&#169 Carpool Buddy LLC</p>
       <ul>
-        <li><span class="icon-facebook2"></span></li>
-        <li><span class="icon-twitter"></span></li>
-        <li><span class="icon-pinterest2"></span></li>
-        <li><span class="icon-github"></span></li>
+        <li class="footer"><a href="https://www.facebook.com/"><span class="icon-facebook2"></a></span></li>
+        <li class="footer"><a href="https://www.twitter.com/"><span class="icon-twitter"></span></a></li>
+        <li class="footer"><a href="https://www.pinterest.com/"><span class="icon-pinterest2"></span></a></li>
+        <li class="footer"><a href="https://www.github.com/"><span class="icon-github"></span></a></li>
       </ul>
     </footer>
 

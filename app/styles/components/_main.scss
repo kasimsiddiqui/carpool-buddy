@@ -12,7 +12,30 @@
   margin-right: 40%;
 }
 
-li {
-  height: 3rem;
-  font-size: 1em;
+
+// li {
+//   height: 3rem;
+//   font-size: 1em;
+// }
+
+.trips-p {
+  display: none;
+}
+
+.main-content {
+  h1{
+    text-align: center;
+    font-size: 2em;
+    color: $text-dark;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: bold;
+    @media only screen and (min-width: 650px) {
+      font-size: 5em;
+    }
+  }
+  .trips-rows {
+    // background-color: primary-color-dark;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+  }
 }
