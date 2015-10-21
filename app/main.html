@@ -85,16 +85,19 @@
       <section>
         <h2>Create A Trip <span class="expand" id="create-trip-expand">+</span></h2>
 
-        <form id="create-trip-form" class="form hidden">
+        <form id="create-trip-form" class="form hidden" data-ng-submit="createTrip(newTrip)">
           <fieldset>
             <label for="create-origin">Where to Start?</label>
-            <input type="text" name="create-origin" id="create-origin" spellcheck="false" />
+            <input type="text" name="create-origin" id="create-origin" spellcheck="false" data-ng-model="newTrip.origin"/>
 
             <label for="create-destination">Where to Go?</label>
-            <input type="text" name="create-destination" id="create-destination" spellcheck="false" />
+            <input type="text" name="create-destination" id="create-destination" spellcheck="false" data-ng-model="newTrip.dest" />
 
             <label for="create-time">What Time to Go?</label>
-            <input type="time" name="create-time" id="create-time" spellcheck="false" />
+            <input type="time" name="create-time" id="create-time" spellcheck="false" data-ng-model="newTrip.originTime"/>
+
+            <label for="create-timeDest">What Time to Arrive?</label>
+            <input type="time" name="create-time" id="create-timeDest" spellcheck="false" data-ng-model="newTrip.destTime"/>
             <label for="create-days">What Days to Go?</label>
            <fieldset class="form-left">
             <label><input type="checkbox" value="sun"/>Sunday</label>
@@ -114,8 +117,8 @@
 
       <section class="trip_info">
         <h2>Delete a Trip</h2>
-        <ul ng-repeat="trip in trips">
-          <li>{{ trip.name }}<span class="delete" id="find-trip-expand" ng-click="vm.delete(vm.file.id)">-</span></li>
+        <ul data-ng-repeat="trip in trips">
+          <li>{{ trip.tripName }}<span class="delete" id="find-trip-expand" ng-click="vm.delete(vm.file.id)">-</span></li>
    <!--      <div class="home">
           <a href="#"><span>^</span></a>
         </div> -->

@@ -61,7 +61,7 @@ tripsRoute.get('/trips/:tripSearch', jsonParser, eatAuth, function(req, res) {
 
 tripsRoute.post('/trips', jsonParser, eatAuth, function(req, res) {
   var tripInfo = req.body.trip;
-  User.findOne({email: req.body.trip.userEmail}, function(err, user) {
+  User.findOne({_id: req.user._id}, function(err, user) {
     var trip = new Trip();
     trip.tripName = tripInfo.tripName;
     trip.origin = tripInfo.origin;
@@ -80,7 +80,7 @@ tripsRoute.post('/trips', jsonParser, eatAuth, function(req, res) {
 
 tripsRoute.put('/trips', jsonParser, eatAuth, function(req, res) {
   var config = req.body.tripConfig;
-  User.findOne({email: config.userEmail}, function(err, user) {
+  User.findOne({_id: req.user._id}, function(err, user) {
     if (err) handleError(err, res, 500);
     if(config.remove === 'true') {
       User.update({_id: user._id}, {$pull: {trips: config.tripId}}, function() {
