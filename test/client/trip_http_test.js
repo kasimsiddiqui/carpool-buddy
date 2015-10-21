@@ -36,6 +36,7 @@ describe('trips controller', function() {
     it('should be able to make a get request to get users trips', function(done) {
       $httpBackend.expectGET('/api/trips').respond(200, [{"origin": "WA"}]);
       $scope.getMyTrips();
+      $httpBackend.flush();
       expect($scope.trips[0].origin).toBe('WA');
     });
   });
