@@ -63,30 +63,29 @@ describe('Trip routes', function() {
     });
   });
 
-  // it('should search +/- 30 min', function(done) {
-  //   var tripSearch = {"origin": "Bellevue, WA", "dest": "Seattle, WA",
-  //                     "originTime": "07:59 AM", // 29 min under
-  //                     "destTime": "08:01 PM"}; // 29 min over
-  //   chai.request(url)
-  //     .get('/trips')
-  //     .send({tripSearch: tripSearch})
-  //     .end(function(err, res) {
-  //       expect(err).to.eql(null);
-  //       expect(res.body.trips[0].origin).to.not.eql(undefined);
-  //       done();
-  //     });
-  // });
+  it('should search +/- 30 min', function(done) {
+    var tripSearch = {"origin": "Bellevue, WA", "dest": "Seattle, WA",
+                      "originTime": "07:59 AM", // 29 min under
+                      "destTime": "08:01 PM"}; // 29 min over
+    tripSearch = JSON.stringify(tripSearch);
+    chai.request(url)
+      .get('/trips/id/' + tripSearch)
+      .end(function(err, res) {
+        expect(err).to.eql(null);
+        expect(res.body.trips[0].origin).to.not.eql(undefined);
+        done();
+      });
+  });
 
-  // it('should search trips by user id', function(done) {
-  //   chai.request(url)
-  //     .get('/trips')
-  //     .send({userEmail: "test email"})
-  //     .end(function(err, res) {
-  //       expect(err).to.eql(null);
-  //       expect(res.body.trips[0].origin).to.not.eql(undefined);
-  //       done();
-  //     });
-  // });
+  it('should search trips by user id', function(done) {
+    chai.request(url)
+      .get('/trips/560d88ab95136958181e421f')
+      .end(function(err, res) {
+        expect(err).to.eql(null);
+        expect(res.body.trips[0].origin).to.not.eql(undefined);
+        done();
+      });
+  });
 
   it('should be able to subscribe to a trip', function(done) {
     chai.request(url)
