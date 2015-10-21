@@ -5,15 +5,25 @@ var jsonParser = require('body-parser').json();
 var handleError = require(__dirname + '/../lib/handle_error');
 var dateParser = require(__dirname + '/../lib/date_parser');
 var findDistance = require(__dirname + '/../app/js/find_distance');
-var ee = require('events');
 
 var tripsRoute = module.exports = exports = express.Router();
 
-tripsRoute.get('/trips', jsonParser, function(req, res) {
-  // if there is a tripSearch object on req.body, then we are finding trips
+tripsRoute.get('/trips/:userId', jsonParser, function(req, res) {
+  // If there is only a userId we are finding all the trips the user is a part of.
+  User.findOne({_id: req.params.userId}, function(err, user) {
+    if (err) handleError(err, res, 500);
+    Trip.find({travelers: user._id}, function(err, docs) {
+      if (err) handleError(err, res, 500);
+      res.json({trips: docs});
+    });
+  });
+});
+
+tripsRoute.get('/trips/:userId/:tripSearch', jsonParser, function(req, res) {
+  // if there is a tripSearch object on req.query, then we are finding trips
   // for the user to sign up to.
-  if (req.body.tripSearch) {
-    var search = req.body.tripSearch;
+  if (req.params.tripSearch) {
+    var search = JSON.parse(req.params.tripSearch);
     // 30 mins less than search time
     var leastTimeOrigin = dateParser(search.originTime) - (1000 * 60 * 30);
     // 30 mins more than search time
@@ -47,15 +57,7 @@ tripsRoute.get('/trips', jsonParser, function(req, res) {
       });
     });
     return;
-  }
-  // Otherwise we are finding all the trips the user is a part of.
-  User.findOne({email: req.body.userEmail}, function(err, user) {
-    if (err) handleError(err, res, 500);
-    Trip.find({travelers: user._id}, function(err, docs) {
-      if (err) handleError(err, res, 500);
-      res.json({trips: docs});
-    });
-  });
+  }  
 });
 
 tripsRoute.post('/trips', jsonParser, function(req, res) {
