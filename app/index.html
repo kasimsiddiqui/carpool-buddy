@@ -25,20 +25,20 @@
             <h2 class="logo">Car Pool Buddy</h2>
 
             <label for="form-email">Email</label>
-            <input type="email" name="email" id="form-email" spellcheck="false" />
-            <label for="form-company-name">Password</label>
-            <input type="password" name="password" id="login-password" spellcheck="false" />
+            <input type="email" name="email" id="form-email" spellcheck="false" data-ng-model="user.email" required/>
+            <label for="form-password">Password</label>
+            <input type="password" name="password" id="login-password" spellcheck="false" data-ng-model="user.password" required/>
             <button type="submit">Submit</login>
           </fieldset>
         </form>
       </div>
+      
       <div id="sign-up-form" data-ng-controller="SignupController">
         <form name="userForm" data-ng-submit="sendToServer(user)" data-user="user">
           <fieldset>
             <a class="form-close" id="signup-form-close">X</a>
             <h2 class="logo">Car Pool Buddy</h2>
             <p>Create an Account</p>
-
 
             <label for="form-email">Email</label>
             <input type="email" name="email" id="form-email" spellcheck="false" data-ng-model="user.email" required/>
@@ -105,6 +105,7 @@
         <li><a href="https://www.github.com/"><span class="icon-github"></span></a></li>
       </ul>
     </footer>
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/jquery-2.1.4.min.js"><\/script>')</script>
