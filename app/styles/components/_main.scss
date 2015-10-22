@@ -71,7 +71,9 @@
   }
   .main-filters{
   @include flex-container(flex,row,nowrap,space-around,center,center);
-
+  height: 570px;
+  background: linear-gradient(to top left, #3E606F, $primary-color-light);
+  padding-bottom: 2em;
   }
   .main-find{
     width: 500px;

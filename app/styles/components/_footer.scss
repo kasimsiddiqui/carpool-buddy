@@ -31,9 +31,9 @@ footer {
   }
 }
 .rotate-icon{
-  -webkit-transition: -webkit-transform 0.4s ease-in;
-  -moz-transition: -moz-transform 0.4s ease-in;
-  -transition: -transform 0.4s ease-in;
+  -webkit-transition: -webkit-transform 0.4s ease-out;
+  -moz-transition: -moz-transform 0.4s ease-out;
+  -transition: -transform 0.4s ease-out;
 }
 .home {
   position:fixed;
