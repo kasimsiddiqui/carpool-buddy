@@ -33,7 +33,7 @@ describe('trips controller', function() {
       $httpBackend.verifyNoOutstandingRequest();
     });
 
-    it('should be able to make a get request to get users trips', function(done) {
+    it('should be able to make a get request to get users trips', function() {
       $httpBackend.expectGET('/api/trips').respond(200, [{"origin": "WA"}]);
       $scope.getMyTrips();
       $httpBackend.flush();
