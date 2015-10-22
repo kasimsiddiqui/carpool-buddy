@@ -7,6 +7,7 @@ module.exports = function(app) {
 
     $http.defaults.headers.common.token = eat;
     $scope.trips = [];
+    $scope.allTrips = [];
     $scope.tripSearchResults = [];
     $scope.newTrip = {};
 
@@ -22,7 +23,7 @@ module.exports = function(app) {
     $scope.getAllTrips = function() {
       $http.get('/api/allTrips')
         .then(function(res) {
-          $scope.trips = res.data.trips;
+          $scope.allTrips = res.data.trips;
         }, function(res) {
           console.log(res);
         });
