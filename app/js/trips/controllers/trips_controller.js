@@ -19,6 +19,15 @@ module.exports = function(app) {
         });
     };
 
+    $scope.getAllTrips = function() {
+      $http.get('/api/allTrips')
+        .then(function(res) {
+          $scope.trips = res.data;
+        }, function(res) {
+          console.log(res);
+        });
+    };
+
     $scope.findTrip = function(tripSearchObj) {
       var search = JSON.stringify(tripSearchObj);
       $http.get('/api/trips/' + search)
