@@ -39,7 +39,19 @@ describe('trips controller', function() {
       $httpBackend.flush();
       expect($scope.trips[0].origin).toBe('WA');
     });
+
+    it('should be able to make a get request to search for new trips', function() {
+      
+    });
+
+    it('should be able to create a trip', function() {
+      var newTrip = {"tripName": "to work", "origin":"address", "originTime":"08:00 AM", "dest":"map coordinates",
+                     "destTime": "10:00 AM", "weekDays":"mon, tue, thu, sat"};
+      $httpBackend.expectPOST('/api/trips', {newTrip: newTrip}).respond(200, {_id: 1, tripName: "success"});
+      $scope.newTrip = {tripName: 'newTrip'};
+      $scope.createTrip(newTrip);
+      $httpBackend.flush();
+      expect($scope.trips[0].tripName).toBe('success');
+    });
   });
-
-
 });
