@@ -76,5 +76,14 @@ describe('trips controller', function() {
       $httpBackend.flush();
       expect($scope.trips[0].travelers[0]).toBe(4);
     });
+
+    it('should make a delete request', function() {
+      var trip = {"tripName": "test", "_id": 1};
+      $scope.trips = [trip];
+      $httpBackend.expectDELETE('/api/trips/' + trip._id).respond(200, {msg: "success"});
+      $scope.removeTrip(trip);
+      $httpBackend.flush();
+      expect($scope.trips.indexOf(trip)).toBe(-1);
+    });
   });
 });

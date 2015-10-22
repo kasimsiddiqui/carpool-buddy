@@ -128,6 +128,15 @@
 	      $httpBackend.flush();
 	      expect($scope.trips[0].travelers[0]).toBe(4);
 	    });
+
+	    it('should make a delete request', function() {
+	      var trip = {"tripName": "test", "_id": 1};
+	      $scope.trips = [trip];
+	      $httpBackend.expectDELETE('/api/trips/' + trip._id).respond(200, {msg: "success"});
+	      $scope.removeTrip(trip);
+	      $httpBackend.flush();
+	      expect($scope.trips.indexOf(trip)).toBe(-1);
+	    });
 	  });
 	});
 
@@ -146,6 +155,9 @@
 
 	__webpack_require__(9)(carpoolApp);
 	__webpack_require__(14)(carpoolApp);
+
+	//require('./router')(carpoolApp);
+	console.log('angular loaded');
 
 
 /***/ },
@@ -30586,8 +30598,8 @@
 
 	module.exports = function(app) {
 	  app.controller('SignupController',
-	    ['$scope', '$http', '$location',
-	    function($scope, $http, $location) {
+	    ['$scope', '$http', '$window', '$cookies',
+	    function($scope, $http, $window, $cookies) {
 	      $scope.user = {};
 	      $scope.confirmPassword = true;
 
@@ -30602,8 +30614,9 @@
 	      $scope.sendToServer = function(user) {
 	        $http.post('/api/signup', user)
 	          .then(function(res) {
-	            //TODO: save token into cookie
-	            //TODO: go to app after login
+	            $cookies.put('eat', res.data.token);
+	            console.log('signup');
+	            $window.location.assign('/main.html');
 	          }, function(res) {
 	            console.log(res);
 	          });
@@ -30619,9 +30632,10 @@
 
 	module.exports = function(app) {
 	  app.controller('SigninController',
-	    ['$scope', '$http', '$location', '$base64',
-	    function($scope, $http, $location, base64) {
+	    ['$scope', '$http', '$window', '$base64', '$cookies',
+	    function($scope, $http, $window, base64, $cookies) {
 	      $scope.user = {};
+	      $scope.confirmPassword = false;
 
 	      $scope.sendToServer = function(user) {
 	        $http({
@@ -30632,8 +30646,9 @@
 	          }
 	        })
 	          .then(function(res) {
-	            //TODO: save token into cookie
-	            //TODO: go to app after login
+	            $cookies.put('eat', res.data.token);
+	            console.log('login');
+	            $window.location.assign('/main.html');
 	          }, function(res) {
 	            console.log(res);
 	          });
@@ -30723,6 +30738,15 @@
 	        });
 	    };
 
+	    $scope.getAllTrips = function() {
+	      $http.get('/api/allTrips')
+	        .then(function(res) {
+	          $scope.trips = res.data;
+	        }, function(res) {
+	          console.log(res);
+	        });
+	    };
+
 	    $scope.findTrip = function(tripSearchObj) {
 	      var search = JSON.stringify(tripSearchObj);
 	      $http.get('/api/trips/' + search)
@@ -30757,8 +30781,17 @@
 	        });
 	    };
 
+	    $scope.removeTrip = function(trip) {
+	      $http.delete('/api/trips/' + trip._id)
+	        .then(function(res) {
+	          $scope.trips.splice($scope.trips.indexOf(trip), 1);
+	        }, function(res) {
+	          console.log(res);
+	        });
+	    };
 	  }]);
 	};
+
 
 /***/ },
 /* 16 */

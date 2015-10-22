@@ -62,5 +62,13 @@ module.exports = function(app) {
         });
     };
 
+    $scope.removeTrip = function(trip) {
+      $http.delete('/api/trips/' + trip._id)
+        .then(function(res) {
+          $scope.trips.splice($scope.trips.indexOf(trip), 1);
+        }, function(res) {
+          console.log(res);
+        });
+    };
   }]);
 };
