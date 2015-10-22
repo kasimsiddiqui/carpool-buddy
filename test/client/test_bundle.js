@@ -51,7 +51,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
-	__webpack_require__(16);
+	__webpack_require__(18);
 
 	describe('trips controller', function() {
 	  var $httpBackend;
@@ -86,7 +86,7 @@
 	    });
 
 	    it('should be able to make a get request to get users trips', function() {
-	      $httpBackend.expectGET('/api/trips').respond(200, [{"origin": "WA"}]);
+	      $httpBackend.expectGET('/api/trips').respond(200, [{trips: {"origin": "WA"}}]);
 	      $scope.getMyTrips();
 	      $httpBackend.flush();
 	      expect($scope.trips[0].origin).toBe('WA');
@@ -155,8 +155,8 @@
 
 	__webpack_require__(9)(carpoolApp);
 	__webpack_require__(14)(carpoolApp);
+	__webpack_require__(16)(carpoolApp);
 
-	//require('./router')(carpoolApp);
 	console.log('angular loaded');
 
 
@@ -30732,7 +30732,7 @@
 	    $scope.getMyTrips = function() {
 	      $http.get('/api/trips')
 	        .then(function(res) {
-	          $scope.trips = res.data;
+	          $scope.trips = res.data.trips;
 	        }, function(res) {
 	          console.log(res);
 	        });
@@ -30741,7 +30741,7 @@
 	    $scope.getAllTrips = function() {
 	      $http.get('/api/allTrips')
 	        .then(function(res) {
-	          $scope.trips = res.data;
+	          $scope.trips = res.data.trips;
 	        }, function(res) {
 	          console.log(res);
 	        });
@@ -30795,6 +30795,36 @@
 
 /***/ },
 /* 16 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(app) {
+	  __webpack_require__(17)(app);
+	};
+
+
+/***/ },
+/* 17 */
+/***/ function(module, exports) {
+
+	module.exports = function(app) {
+	  app.run(['$rootScope', '$cookies', '$window', '$http',
+	    function($scope, $cookies, $window, $http) {
+	      $scope.loggedIn = function() {
+	        var eat = $cookies.get('eat');
+	        return (eat && eat.length);
+	      };
+
+	      $scope.logOut = function() {
+	        console.log('remove cookie');
+	        $cookies.remove('eat');
+	        $window.location.assign('/index.html');
+	      };
+	    }
+	  ]);
+	};
+
+/***/ },
+/* 18 */
 /***/ function(module, exports) {
 
 	/**
