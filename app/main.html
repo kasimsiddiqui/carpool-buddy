@@ -32,7 +32,7 @@
         </div>
       </section>
     </header>
-    <main>
+    <main data-ng-controller="TripsController" data-ng-init="getAllTrips()">
       <div class="hidden">
         <section class="third-banner">
           <ul>
@@ -46,7 +46,7 @@
       </div>
       <div class="main-content">
         <section class="main-filters">
-          <section class="main-find" data-ng-controller="TripsController">
+          <section class="main-find">
             <h2 id="find" class=" hidden_span">Find a Trip <span class="expand" id="find-trip-expand">+</span></h2>
             <form id="find-trip-form" class="form hidden" data-ng-submit="findTrip(tripSearchObj)">
               <fieldset>
@@ -75,7 +75,7 @@
             </form>
           </section> <!-- main-find -->
 
-          <section class="main-create" data-ng-controller="TripsController" >
+          <section class="main-create">
             <h2 id="create" class=" hidden_span">Create A Trip <span class="expand" id="create-trip-expand">+</span></h2>
 
             <form id="create-trip-form" class="form hidden" data-ng-submit="createTrip(newTrip)">
@@ -112,20 +112,17 @@
 
         <section class="main-trips">
           <h2 id="all">All Trips</h2>
-
-          <section class="trip_info">
+          <section class="trip_info" data-ng-repeat="trip in trips">
             <div class="content">
               <h3 >{{ trip.tripName }}</h3>
               <span class="expand_delete" id="trips-1">&#8595</span>
             </div>
-            <ul id="trips-details-1" class="hide">
+            <ul id="trips-details-1">
               <li>
                 <p>{{ trip.origin }}</p>
-                <p>{{ trip.destination }}</p>
-                <p>{{ trip.time }}</p>
-                <p>{{ trip.days }}</p>
-                <p>{{ trip.users }}</p>
-                <p>{{ trip.users.email }}</p>
+                <p>{{ trip.dest }}</p>
+                <p>{{ trip.originTime }}</p>
+                <p>{{ trip.destTime }}</p>
               </li>
             </ul>
           </section>
