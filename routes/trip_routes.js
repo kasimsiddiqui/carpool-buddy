@@ -72,7 +72,6 @@ tripsRoute.post('/trips', jsonParser, eatAuth, function(req, res) {
     var trip = new Trip();
     trip.tripName = tripInfo.tripName;
     trip.origin = tripInfo.origin;
-    console.log(tripInfo);
     trip.originTime = dateParser(tripInfo.originTime);
     trip.dest = tripInfo.dest;
     trip.destTime = dateParser(tripInfo.destTime);
