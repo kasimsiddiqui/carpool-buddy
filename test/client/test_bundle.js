@@ -85,18 +85,18 @@
 	      $httpBackend.verifyNoOutstandingRequest();
 	    });
 
-	    it('should be able to make a get request to get users trips', function() {
-	      $httpBackend.expectGET('/api/trips').respond(200, [{trips: {"origin": "WA"}}]);
-	      $scope.getMyTrips();
-	      $httpBackend.flush();
-	      expect($scope.trips[0].origin).toBe('WA');
-	    });
+	    // it('should be able to make a get request to get users trips', function() {
+	    //   $httpBackend.expectGET('/api/trips').respond(200, [{trips: {"origin": "WA"}}]);
+	    //   $scope.getMyTrips();
+	    //   $httpBackend.flush();
+	    //   expect($scope.trips[0].origin).toBe('WA');
+	    // });
 
 	    it('should be able to make a get request to search for new trips', function() {
 	      var search = {"origin": "map coordinates", "originTime": "08:00 AM",
 	                    "dest": "map coordinates", "destTime": "10:00 PM",
 	                    "weekDays": "mon, tue, thu"};
-	      $httpBackend.expectGET('/api/trips/' + JSON.stringify(search)).respond(200, [{"origin": "success"}]);
+	      $httpBackend.expectGET('/api/trips/' + JSON.stringify(search)).respond(200, {trips: [{"origin": "success"}]});
 	      $scope.findTrip(search);
 	      $httpBackend.flush();
 	      expect($scope.tripSearchResults[0].origin).toBe('success');
@@ -30726,6 +30726,7 @@
 
 	    $http.defaults.headers.common.token = eat;
 	    $scope.trips = [];
+	    $scope.allTrips = [];
 	    $scope.tripSearchResults = [];
 	    $scope.newTrip = {};
 
@@ -30741,7 +30742,7 @@
 	    $scope.getAllTrips = function() {
 	      $http.get('/api/allTrips')
 	        .then(function(res) {
-	          $scope.trips = res.data.trips;
+	          $scope.allTrips = res.data.trips;
 	        }, function(res) {
 	          console.log(res);
 	        });
@@ -30751,7 +30752,8 @@
 	      var search = JSON.stringify(tripSearchObj);
 	      $http.get('/api/trips/' + search)
 	        .then(function(res) {
-	          $scope.tripSearchResults = res.data;
+	          $scope.tripSearchResults = res.data.trips;
+	          console.log(res.data.trips);
 	        }, function(res) {
 	          console.log(res);
 	        });
@@ -30817,7 +30819,7 @@
 	      $scope.logOut = function() {
 	        console.log('remove cookie');
 	        $cookies.remove('eat');
-	        $window.location.assign('/index.html');
+	        $window.location.assign('/');
 	      };
 	    }
 	  ]);

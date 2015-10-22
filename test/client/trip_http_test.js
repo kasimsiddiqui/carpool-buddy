@@ -34,7 +34,7 @@ describe('trips controller', function() {
     });
 
     it('should be able to make a get request to get users trips', function() {
-      $httpBackend.expectGET('/api/trips').respond(200, [{trips: {"origin": "WA"}}]);
+      $httpBackend.expectGET('/api/trips').respond(200, {trips: [{"origin": "WA"}]});
       $scope.getMyTrips();
       $httpBackend.flush();
       expect($scope.trips[0].origin).toBe('WA');
@@ -44,7 +44,7 @@ describe('trips controller', function() {
       var search = {"origin": "map coordinates", "originTime": "08:00 AM",
                     "dest": "map coordinates", "destTime": "10:00 PM",
                     "weekDays": "mon, tue, thu"};
-      $httpBackend.expectGET('/api/trips/' + JSON.stringify(search)).respond(200, [{"origin": "success"}]);
+      $httpBackend.expectGET('/api/trips/' + JSON.stringify(search)).respond(200, {trips: [{"origin": "success"}]});
       $scope.findTrip(search);
       $httpBackend.flush();
       expect($scope.tripSearchResults[0].origin).toBe('success');
