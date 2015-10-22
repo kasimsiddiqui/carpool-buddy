@@ -107,7 +107,7 @@
 	__webpack_require__(6);
 	__webpack_require__(7);
 
-	var carpoolApp = angular.module('carpoolApp', []);
+	var carpoolApp = angular.module('carpoolApp', ['ngRoute', 'base64', 'ngCookies']);
 
 	__webpack_require__(9)(carpoolApp);
 	__webpack_require__(14)(carpoolApp);
