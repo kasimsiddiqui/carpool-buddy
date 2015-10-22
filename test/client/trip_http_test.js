@@ -68,5 +68,13 @@ describe('trips controller', function() {
       $httpBackend.flush();
       expect($scope.trips.indexOf({"tripName": "test", _id: 1})).toBe(-1);
     });
+
+    it('should subscribe a user to a trip', function() {
+      var trip = {"tripName": "test", "_id": 1, "travelers": []};
+      $httpBackend.expectPUT('/api/trips', {tripConfig: {"remove": "false", "tripId": 1}}).respond(200, {userId: 4});
+      $scope.tripSubsciption(trip, "false");
+      $httpBackend.flush();
+      expect($scope.trips[0].travelers[0]).toBe(4);
+    });
   });
 });

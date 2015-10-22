@@ -46,7 +46,8 @@ module.exports = function(app) {
           if (tripConfig.remove === "true") {
             return $scope.trips.splice($scope.trips.indexOf(trip), 1);
           }
-          $scope.trips[$scope.trips.indexOf(trip)].travelers.push(res.userId);
+          trip.travelers.push(res.data.userId);
+          $scope.trips.push(trip);
         }, function(res) {
           console.log(res);
         });

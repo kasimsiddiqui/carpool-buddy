@@ -120,6 +120,14 @@
 	      $httpBackend.flush();
 	      expect($scope.trips.indexOf({"tripName": "test", _id: 1})).toBe(-1);
 	    });
+
+	    it('should subscribe a user to a trip', function() {
+	      var trip = {"tripName": "test", "_id": 1, "travelers": []};
+	      $httpBackend.expectPUT('/api/trips', {tripConfig: {"remove": "false", "tripId": 1}}).respond(200, {userId: 4});
+	      $scope.tripSubsciption(trip, "false");
+	      $httpBackend.flush();
+	      expect($scope.trips[0].travelers[0]).toBe(4);
+	    });
 	  });
 	});
 
@@ -30742,7 +30750,8 @@
 	          if (tripConfig.remove === "true") {
 	            return $scope.trips.splice($scope.trips.indexOf(trip), 1);
 	          }
-	          $scope.trips[$scope.trips.indexOf(trip)].travelers.push(res.userId);
+	          trip.travelers.push(res.data.userId);
+	          $scope.trips.push(trip);
 	        }, function(res) {
 	          console.log(res);
 	        });
