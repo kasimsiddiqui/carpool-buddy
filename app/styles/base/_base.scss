@@ -9,4 +9,10 @@ a {
 
 .hidden {
   display: none;
+  @media only screen and (min-width: 650px) {
+    display: inline;
+  .hidden_span{
+    display: hidden;
+  }
+  }
 }

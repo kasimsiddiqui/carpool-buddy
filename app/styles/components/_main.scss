@@ -59,18 +59,32 @@
 .content{
   @include flex-container(flex,row,nowrap,center,center,center);
   h3{
-    padding-right: 30%;
+    padding-right: 2%;
   }
 }
+
+// desktop layout
 @media only screen and (min-width: 650px) {
+
+
   .main-content{
-  overflow: auto;
   }
   .main-filters{
-    position: fixed;
-    position: clearfix;
+  @include flex-container(flex,row,nowrap,space-around,center,center);
+
+  }
+  .main-find{
+    width: 500px;
+  }
+  .main-create{
+    width: 500px;
+
   }
   .main-trips{
     @include flex-container(flex,column,nowrap,flex-start,center,center);
   }
 }
+
+
+
+
