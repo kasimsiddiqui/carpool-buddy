@@ -9,6 +9,7 @@
   width: 95%;
   margin-bottom: 0;
 
+
   @include flex-container(flex,row,wrap,center,center,center);
   p {
     font-family: 'Josefin Sans', sans-serif;
