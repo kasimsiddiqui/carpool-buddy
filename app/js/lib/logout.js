@@ -9,7 +9,7 @@ module.exports = function(app) {
       $scope.logOut = function() {
         console.log('remove cookie');
         $cookies.remove('eat');
-        $window.location.assign('/index.html');
+        $window.location.assign('/');
       };
     }
   ]);
