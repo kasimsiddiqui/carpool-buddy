@@ -61,11 +61,11 @@ res {
 
 POST /api/trips
   creates a trip entry in the database. Needs a JSON object
-  attached to req.body.trip with the trip origin, originTime, dest,
+  attached to req.body.newTrip with the trip origin, originTime, dest,
   destTime, weekDays, map. it should look like:
 
 ```
-req.body.trips = {"tripName": "to work", "origin":"map coordinates", "originTime":"08:00 AM", "dest":"map coordinates",
+req.body.newTrip = {"tripName": "to work", "origin":"map coordinates", "originTime":"08:00 AM", "dest":"map coordinates",
  "destTime": "10:00 AM", "weekDays":"mon, tue, thu, sat"}
 ```
 
