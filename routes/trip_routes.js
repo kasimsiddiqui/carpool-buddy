@@ -67,11 +67,12 @@ tripsRoute.get('/trips/:tripSearch', jsonParser, eatAuth, function(req, res) {
 });
 
 tripsRoute.post('/trips', jsonParser, eatAuth, function(req, res) {
-  var tripInfo = req.body.trip;
+  var tripInfo = req.body.newTrip;
   User.findOne({_id: req.user._id}, function(err, user) {
     var trip = new Trip();
     trip.tripName = tripInfo.tripName;
     trip.origin = tripInfo.origin;
+    console.log(tripInfo);
     trip.originTime = dateParser(tripInfo.originTime);
     trip.dest = tripInfo.dest;
     trip.destTime = dateParser(tripInfo.destTime);
