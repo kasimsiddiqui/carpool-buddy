@@ -13,7 +13,7 @@ module.exports = function(app) {
     $scope.getMyTrips = function() {
       $http.get('/api/trips')
         .then(function(res) {
-          $scope.trips = res.data;
+          $scope.trips = res.data.trips;
         }, function(res) {
           console.log(res);
         });
@@ -22,7 +22,7 @@ module.exports = function(app) {
     $scope.getAllTrips = function() {
       $http.get('/api/allTrips')
         .then(function(res) {
-          $scope.trips = res.data;
+          $scope.trips = res.data.trips;
         }, function(res) {
           console.log(res);
         });
