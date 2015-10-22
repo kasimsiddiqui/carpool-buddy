@@ -1,4 +1,4 @@
-# carpool-buddy
+ # carpool-buddy
 
 ## Environmental Variables
 
@@ -32,7 +32,7 @@ GET /api/signin
 
 GET /api/trips
 
-  returns an array of trip objects that the user is 
+  returns an array of trip objects that the user is
   a part of on res.body.trips
 
 GET /api/trips/:stringifiedSearchObject
@@ -47,7 +47,7 @@ GET /api/trips/:stringifiedSearchObject
 ```
 
   Make sure the object is stringified before you send it!
-  
+
   the return will look like:
 ```
 res {
