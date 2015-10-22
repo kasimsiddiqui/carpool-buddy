@@ -99,14 +99,14 @@ tripsRoute.put('/trips', jsonParser, eatAuth, function(req, res) {
     }
     User.update({_id: user._id}, {$push: {trips: config.tripId}}, function() {
       Trip.update({_id: config.tripId}, {$push: {travelers: user._id}}, function() {
-        res.send({msg: 'success'});
+        res.send({userId: user._id});
       });
     });
   });
 });
 
-tripsRoute.delete('/trips', jsonParser, eatAuth, function(req, res) {
-  Trip.remove({_id: req.body.tripId}, function(err) {
+tripsRoute.delete('/trips/:id', jsonParser, eatAuth, function(req, res) {
+  Trip.remove({_id: req.params.id}, function(err) {
     if (err) return handleError(err, res, 500);
     res.json({msg: 'success'});
   });

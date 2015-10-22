@@ -48,14 +48,27 @@ module.exports = function(app) {
         });
     };
 
-    $scope.tripSubsciption = function(trip) {
-      $http.put('/api/trips', {tripConfig: trip})
+    $scope.tripSubsciption = function(trip, remove) {
+      var tripConfig = {"remove": remove, "tripId": trip._id};
+      $http.put('/api/trips', {tripConfig: tripConfig})
         .then(function(res) {
-          $scope.trips[$scope.trips.indexOf(trip)] = res.data;
+          if (tripConfig.remove === "true") {
+            return $scope.trips.splice($scope.trips.indexOf(trip), 1);
+          }
+          trip.travelers.push(res.data.userId);
+          $scope.trips.push(trip);
         }, function(res) {
           console.log(res);
         });
     };
 
+    $scope.removeTrip = function(trip) {
+      $http.delete('/api/trips/' + trip._id)
+        .then(function(res) {
+          $scope.trips.splice($scope.trips.indexOf(trip), 1);
+        }, function(res) {
+          console.log(res);
+        });
+    };
   }]);
 };

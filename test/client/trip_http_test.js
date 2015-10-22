@@ -59,5 +59,31 @@ describe('trips controller', function() {
       $httpBackend.flush();
       expect($scope.trips[0].tripName).toBe('success');
     });
+
+    it('should be able to unsubscribe a user from a trip', function() {
+      var trip = {"tripName": "test", "_id": 1};
+      $scope.trips = [trip];
+      $httpBackend.expectPUT('/api/trips', {tripConfig: {"remove": "true", "tripId": 1}}).respond(200, {msg: "success"});
+      $scope.tripSubsciption(trip, "true");
+      $httpBackend.flush();
+      expect($scope.trips.indexOf({"tripName": "test", _id: 1})).toBe(-1);
+    });
+
+    it('should subscribe a user to a trip', function() {
+      var trip = {"tripName": "test", "_id": 1, "travelers": []};
+      $httpBackend.expectPUT('/api/trips', {tripConfig: {"remove": "false", "tripId": 1}}).respond(200, {userId: 4});
+      $scope.tripSubsciption(trip, "false");
+      $httpBackend.flush();
+      expect($scope.trips[0].travelers[0]).toBe(4);
+    });
+
+    it('should make a delete request', function() {
+      var trip = {"tripName": "test", "_id": 1};
+      $scope.trips = [trip];
+      $httpBackend.expectDELETE('/api/trips/' + trip._id).respond(200, {msg: "success"});
+      $scope.removeTrip(trip);
+      $httpBackend.flush();
+      expect($scope.trips.indexOf(trip)).toBe(-1);
+    });
   });
 });
