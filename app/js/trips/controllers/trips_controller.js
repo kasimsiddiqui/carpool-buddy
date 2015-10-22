@@ -6,6 +6,7 @@ module.exports = function(app) {
       $location.path('/signup');
 
     $http.defaults.headers.common.token = eat;
+    $scope.trips = [];
     $scope.allTrips = [];
     $scope.tripSearchResults = [];
     $scope.newTrip = {};
