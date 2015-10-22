@@ -57,7 +57,7 @@
                 <input type="text" name="find-destination" id="find-destination" spellcheck="false" data-ng-model="tripSearchObj.dest" />
 
                 <label for="find-time">What Time to Go?</label>
-                <input type="text" name="find-time" id="find-time" spellcheck="false" data-ng-model="tripSearchObj.destTime" placeholder="HH:MM AM/PM"/>
+                <input type="time" name="find-time" id="find-time" spellcheck="false" data-ng-model="tripSearchObj.destTime" placeholder="HH:MM AM/PM"/>
                 <label for="find-days" >What Days to Go?</label>
                <!-- <fieldset class="form-left">
                 <label><input type="checkbox" value="sun"/>Sunday</label>
@@ -87,9 +87,13 @@
                 <input type="text" name="create-destination" id="create-destination" spellcheck="false" data-ng-model="newTrip.dest" />
 
                 <label for="create-time">What Time to Go?</label>
-                <input type="text" name="create-time" id="create-time" spellcheck="false"data-ng-model="newTrip.destTime" placeholder="HH:MM AM/PM"/>
-                <label for="create-days">What Days to Go?</label>
- <!--               <fieldset class="form-left">
+                <input type="text" name="create-time" id="create-time" spellcheck="false" data-ng-model="newTrip.originTime" placeholder="HH:MM AM/PM"/>
+
+                <label for="create-arrive-time">What Time to Get There?</label>
+                <input type="text" name="create-time" id="create-arrive-time" spellcheck="false" data-ng-model="newTrip.destTime" placeholder="HH:MM AM/PM"/>
+
+ <!--           <label for="create-days">What Days to Go?</label>
+               <fieldset class="form-left">
                 <label><input type="checkbox" value="sun"/>Sunday</label>
                 <label><input type="checkbox" value="tue" checked="true"/>Tuesday</label>
                 <label><input type="checkbox" value="thu" checked="true"/>Thursday</label>
