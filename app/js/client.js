@@ -8,3 +8,6 @@ var carpoolApp = angular.module('carpoolApp', ['ngRoute', 'base64', 'ngCookies']
 
 require('./users/entry')(carpoolApp);
 require('./trips/entry')(carpoolApp);
+
+//require('./router')(carpoolApp);
+console.log('angular loaded');
