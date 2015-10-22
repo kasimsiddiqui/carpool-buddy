@@ -59,5 +59,14 @@ describe('trips controller', function() {
       $httpBackend.flush();
       expect($scope.trips[0].tripName).toBe('success');
     });
+
+    it('should be able to unsubscribe a user from a trip', function() {
+      var trip = {"tripName": "test", "_id": 1};
+      $scope.trips = [trip];
+      $httpBackend.expectPUT('/api/trips', {tripConfig: {"remove": "true", "tripId": 1}}).respond(200, {msg: "success"});
+      $scope.tripSubsciption(trip, "true");
+      $httpBackend.flush();
+      expect($scope.trips.indexOf({"tripName": "test", _id: 1})).toBe(-1);
+    });
   });
 });

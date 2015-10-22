@@ -39,10 +39,14 @@ module.exports = function(app) {
         });
     };
 
-    $scope.tripSubsciption = function(trip) {
-      $http.put('/api/trips', {tripConfig: trip})
+    $scope.tripSubsciption = function(trip, remove) {
+      var tripConfig = {"remove": remove, "tripId": trip._id};
+      $http.put('/api/trips', {tripConfig: tripConfig})
         .then(function(res) {
-          $scope.trips[$scope.trips.indexOf(trip)] = res.data;
+          if (tripConfig.remove === "true") {
+            return $scope.trips.splice($scope.trips.indexOf(trip), 1);
+          }
+          $scope.trips[$scope.trips.indexOf(trip)].travelers.push(res.userId);
         }, function(res) {
           console.log(res);
         });
