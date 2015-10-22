@@ -1,7 +1,7 @@
 module.exports = function(app) {
   app.controller('SignupController',
-    ['$scope', '$http', '$window',
-    function($scope, $http, $window) {
+    ['$scope', '$http', '$window', '$cookies',
+    function($scope, $http, $window, $cookies) {
       $scope.user = {};
       $scope.confirmPassword = true;
 
@@ -16,7 +16,7 @@ module.exports = function(app) {
       $scope.sendToServer = function(user) {
         $http.post('/api/signup', user)
           .then(function(res) {
-            //TODO: save token into cookie
+            $cookies.put('eat', res.data.token);
             console.log('signup');
             $window.location.assign('/main.html');
           }, function(res) {
