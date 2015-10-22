@@ -53,18 +53,12 @@
                 <label for="find-destination">Where to Go?</label>
                 <input type="text" name="find-destination" id="find-destination" spellcheck="false" data-ng-model="tripSearchObj.dest" />
                 <label for="find-time">What Time to Go?</label>
-<<<<<<< HEAD
                 <input type="text" name="find-time" id="find-time" spellcheck="false" data-ng-model="tripSearchObj.originTime" placeholder="HH:MM AM/PM"/>
 
                 <label for="find-arrive-time">What Time to Get There?</label>
                 <input type="text" name="find-time" id="find-arrive-time" spellcheck="false" data-ng-model="tripSearchObj.destTime" placeholder="HH:MM AM/PM"/>
                 <!-- <label for="find-days" >What Days to Go?</label> -->
                <!-- <fieldset class="form-left">
-=======
-                <input type="time" name="find-time" id="find-time" spellcheck="false" data-ng-model="tripSearchObj.destTime" placeholder="HH:MM AM/PM"/>
-          <!--  <label for="find-days" >What Days to Go?</label>
-                <fieldset class="form-left">
->>>>>>> dc37d774af661ee6d1d1b7eeb8e6fc67108746ed
                 <label><input type="checkbox" value="sun"/>Sunday</label>
                 <label><input type="checkbox" value="tue" checked="true"/>Tuesday</label>
                 <label><input type="checkbox" value="thu" checked="true"/>Thursday</label>
@@ -76,7 +70,6 @@
                 <label><input type="checkbox" value="fri" checked="true"/>Friday</label>
               </fieldset> -->
                 <button type="submit">Submit</login>
-                <p>{{$scope.tripSearchResults}}</p>
               </fieldset>
             </form>
           </section> <!-- main-find -->
@@ -115,7 +108,7 @@
         </section> <!-- filters -->
         <section class="main-trips">
           <h2 id="all">All Trips</h2>
-          <section class="trip_info" data-ng-repeat="trip in trips">
+          <section class="trip_info" data-ng-repeat="trip in allTrips">
             <div class="content">
               <h3 >{{ trip.tripName }}</h3>
               <span class="expand_delete" id="trips-1">&#8595</span>
