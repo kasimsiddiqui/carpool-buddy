@@ -28,13 +28,9 @@ build/Release
 # Dependency Directory
 node_modules
 db
-
-#Dependency Directory
-node_modules
-db
 public
 
-#Dev Environment
+# Dev Environment
 .env
 
 test/client/test_bundle.js
