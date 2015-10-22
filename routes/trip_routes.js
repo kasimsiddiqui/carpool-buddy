@@ -10,10 +10,17 @@ var eatAuth = require(__dirname + '/../lib/eat_auth');
 var tripsRoute = module.exports = exports = express.Router();
 
 tripsRoute.get('/trips', jsonParser, eatAuth, function(req, res) {
-  // If there is only a userId we are finding all the trips the user is a part of.  
-  
+  // If there is only a userId we are finding all the trips the user is a part of.
+
   Trip.find({travelers: req.user._id}, function(err, docs) {
-    
+
+    if (err) handleError(err, res, 500);
+    res.json({trips: docs});
+  });
+});
+
+tripsRoute.get('/allTrips', jsonParser, eatAuth, function(req, res) {
+  Trip.find({}, function(err, docs) {
     if (err) handleError(err, res, 500);
     res.json({trips: docs});
   });
