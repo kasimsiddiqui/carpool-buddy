@@ -1,6 +1,5 @@
- # carpool-buddy
-
-
+# carpool-buddy
+=================
 [![Build Status](https://travis-ci.org/carpool-buddy/carpool-buddy.svg)](https://travis-ci.org/carpool-buddy/carpool-buddy)
 
 ## Environmental Variables
