@@ -99,7 +99,7 @@ tripsRoute.put('/trips', jsonParser, eatAuth, function(req, res) {
     }
     User.update({_id: user._id}, {$push: {trips: config.tripId}}, function() {
       Trip.update({_id: config.tripId}, {$push: {travelers: user._id}}, function() {
-        res.send({msg: 'success'});
+        res.send({userId: user._id});
       });
     });
   });

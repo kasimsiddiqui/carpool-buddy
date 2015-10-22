@@ -111,6 +111,23 @@
 	      $httpBackend.flush();
 	      expect($scope.trips[0].tripName).toBe('success');
 	    });
+
+	    it('should be able to unsubscribe a user from a trip', function() {
+	      var trip = {"tripName": "test", "_id": 1};
+	      $scope.trips = [trip];
+	      $httpBackend.expectPUT('/api/trips', {tripConfig: {"remove": "true", "tripId": 1}}).respond(200, {msg: "success"});
+	      $scope.tripSubsciption(trip, "true");
+	      $httpBackend.flush();
+	      expect($scope.trips.indexOf({"tripName": "test", _id: 1})).toBe(-1);
+	    });
+
+	    it('should subscribe a user to a trip', function() {
+	      var trip = {"tripName": "test", "_id": 1, "travelers": []};
+	      $httpBackend.expectPUT('/api/trips', {tripConfig: {"remove": "false", "tripId": 1}}).respond(200, {userId: 4});
+	      $scope.tripSubsciption(trip, "false");
+	      $httpBackend.flush();
+	      expect($scope.trips[0].travelers[0]).toBe(4);
+	    });
 	  });
 	});
 
@@ -30726,10 +30743,15 @@
 	        });
 	    };
 
-	    $scope.tripSubsciption = function(trip) {
-	      $http.put('/api/trips', {tripConfig: trip})
+	    $scope.tripSubsciption = function(trip, remove) {
+	      var tripConfig = {"remove": remove, "tripId": trip._id};
+	      $http.put('/api/trips', {tripConfig: tripConfig})
 	        .then(function(res) {
-	          $scope.trips[$scope.trips.indexOf(trip)] = res.data;
+	          if (tripConfig.remove === "true") {
+	            return $scope.trips.splice($scope.trips.indexOf(trip), 1);
+	          }
+	          trip.travelers.push(res.data.userId);
+	          $scope.trips.push(trip);
 	        }, function(res) {
 	          console.log(res);
 	        });
