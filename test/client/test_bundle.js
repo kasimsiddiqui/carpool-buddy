@@ -51,7 +51,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
-	__webpack_require__(14);
+	__webpack_require__(16);
 
 	describe('trips controller', function() {
 	  var $httpBackend;
@@ -110,7 +110,7 @@
 	var carpoolApp = angular.module('carpoolApp', []);
 
 	__webpack_require__(9)(carpoolApp);
-	__webpack_require__(12)(carpoolApp);
+	__webpack_require__(14)(carpoolApp);
 
 
 /***/ },
@@ -30541,6 +30541,7 @@
 	module.exports = function(app) {
 	  __webpack_require__(10)(app);
 	  __webpack_require__(11)(app);
+	  __webpack_require__(12)(app);
 	};
 
 
@@ -30553,6 +30554,15 @@
 	    ['$scope', '$http', '$location',
 	    function($scope, $http, $location) {
 	      $scope.user = {};
+	      $scope.confirmPassword = true;
+
+	      $scope.passwordMatch = function(user) {
+	        return user.password === user.confirmation;
+	      };
+
+	      $scope.disableButton = function(user) {
+	        return ($scope.userForm.$invalid && !$scope.passwordMatch(user));
+	      };
 
 	      $scope.sendToServer = function(user) {
 	        $http.post('/api/signup', user)
@@ -30612,9 +30622,61 @@
 /***/ function(module, exports) {
 
 	module.exports = function(app) {
-	  app.controller('TripsController', ['$scope', '$http', function($scope, $http) {
+	  app.directive('match', function() {
+	    return {
+	      //This solution is from http://stackoverflow.com/questions/14012239 (Jan Laussmann's solution)
+	      restrict: 'A',
+	      require: 'ngModel',
+	      link: function(scope, element, attrs, ngModel) {
+	        if(!ngModel) return; // do nothing if no ng-model
 
+	        // watch own value and re-validate on change
+	        scope.$watch(attrs.ngModel, function() {
+	          validate();
+	        });
+
+	        // observe the other value and re-validate on change
+	        attrs.$observe('match', function (val) {
+	          validate();
+	        });
+
+	        var validate = function() {
+	          // values
+	          var val1 = ngModel.$viewValue;
+	          var val2 = attrs.match;
+
+	          // set validity
+	          ngModel.$setValidity('match', ! val1 || ! val2 || val1 === val2);
+	        };
+	      }
+	    };
+	  });
+	};
+
+
+/***/ },
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(app) {
+	  __webpack_require__(15)(app);
+	};
+
+
+/***/ },
+/* 15 */
+/***/ function(module, exports) {
+
+	module.exports = function(app) {
+	  app.controller('TripsController', ['$scope', '$http', '$cookies', '$location', function($scope, $http, $cookies, $location) {
+
+	    var eat = $cookies.get('eat');
+	    if (!(eat && eat.length))
+	      $location.path('/signup');
+
+	    $http.defaults.headers.common.token = eat;
 	    $scope.trips = [];
+	    $scope.newTrip = {};
 
 	    $scope.getMyTrips = function() {
 	      $http.get('/api/trips')
@@ -30624,11 +30686,22 @@
 	          console.log(res);
 	        });
 	    };
+
+	    $scope.createTrip = function(trip) {
+	      $http.post('/api/trips', trip)
+	        .then(function(res) {
+	          $scope.newTrip = {};
+	          $scope.trips.push(res.data);
+	        }, function(res) {
+	          console.log(res);
+	        });
+	    };
+
 	  }]);
 	};
 
 /***/ },
-/* 14 */
+/* 16 */
 /***/ function(module, exports) {
 
 	/**

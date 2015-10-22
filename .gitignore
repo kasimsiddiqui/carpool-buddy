@@ -1,7 +1,6 @@
 # Mac Files
 .DS_Store
 
-<<<<<<< HEAD
 # Logs
 logs
 *.log
@@ -38,3 +37,4 @@ public
 #Dev Environment
 .env
 
+test/client/test_bundle.js
