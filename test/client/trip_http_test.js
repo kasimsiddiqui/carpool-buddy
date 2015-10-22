@@ -41,7 +41,13 @@ describe('trips controller', function() {
     });
 
     it('should be able to make a get request to search for new trips', function() {
-      
+      var search = {"origin": "map coordinates", "originTime": "08:00 AM",
+                    "dest": "map coordinates", "destTime": "10:00 PM",
+                    "weekDays": "mon, tue, thu"};
+      $httpBackend.expectGET('/api/trips/' + JSON.stringify(search)).respond(200, [{"origin": "success"}]);
+      $scope.findTrip(search);
+      $httpBackend.flush();
+      expect($scope.tripSearchResults[0].origin).toBe('success');
     });
 
     it('should be able to create a trip', function() {

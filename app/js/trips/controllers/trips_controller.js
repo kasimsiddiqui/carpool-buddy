@@ -39,8 +39,8 @@ module.exports = function(app) {
         });
     };
 
-    $scope.unsubsribeTrip = function(trip) {
-      $http.put('/api/trips', trip)
+    $scope.tripSubsciption = function(trip) {
+      $http.put('/api/trips', {tripConfig: trip})
         .then(function(res) {
           $scope.trips[$scope.trips.indexOf(trip)] = res.data;
         }, function(res) {
