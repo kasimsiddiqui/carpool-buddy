@@ -51,7 +51,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(2);
-	__webpack_require__(14);
+	__webpack_require__(16);
 
 	describe('trips controller', function() {
 	  var $httpBackend;
@@ -85,15 +85,33 @@
 	      $httpBackend.verifyNoOutstandingRequest();
 	    });
 
-	    it('should be able to make a get request to get users trips', function(done) {
+	    it('should be able to make a get request to get users trips', function() {
 	      $httpBackend.expectGET('/api/trips').respond(200, [{"origin": "WA"}]);
 	      $scope.getMyTrips();
 	      $httpBackend.flush();
 	      expect($scope.trips[0].origin).toBe('WA');
 	    });
+
+	    it('should be able to make a get request to search for new trips', function() {
+	      var search = {"origin": "map coordinates", "originTime": "08:00 AM",
+	                    "dest": "map coordinates", "destTime": "10:00 PM",
+	                    "weekDays": "mon, tue, thu"};
+	      $httpBackend.expectGET('/api/trips/' + JSON.stringify(search)).respond(200, [{"origin": "success"}]);
+	      $scope.findTrip(search);
+	      $httpBackend.flush();
+	      expect($scope.tripSearchResults[0].origin).toBe('success');
+	    });
+
+	    it('should be able to create a trip', function() {
+	      var newTrip = {"tripName": "to work", "origin":"address", "originTime":"08:00 AM", "dest":"map coordinates",
+	                     "destTime": "10:00 AM", "weekDays":"mon, tue, thu, sat"};
+	      $httpBackend.expectPOST('/api/trips', {newTrip: newTrip}).respond(200, {_id: 1, tripName: "success"});
+	      $scope.newTrip = {tripName: 'newTrip'};
+	      $scope.createTrip(newTrip);
+	      $httpBackend.flush();
+	      expect($scope.trips[0].tripName).toBe('success');
+	    });
 	  });
-
-
 	});
 
 
@@ -107,10 +125,10 @@
 	__webpack_require__(6);
 	__webpack_require__(7);
 
-	var carpoolApp = angular.module('carpoolApp', []);
+	var carpoolApp = angular.module('carpoolApp', ['ngRoute', 'base64', 'ngCookies']);
 
 	__webpack_require__(9)(carpoolApp);
-	__webpack_require__(12)(carpoolApp);
+	__webpack_require__(14)(carpoolApp);
 
 
 /***/ },
@@ -30541,6 +30559,7 @@
 	module.exports = function(app) {
 	  __webpack_require__(10)(app);
 	  __webpack_require__(11)(app);
+	  __webpack_require__(12)(app);
 	};
 
 
@@ -30553,6 +30572,15 @@
 	    ['$scope', '$http', '$location',
 	    function($scope, $http, $location) {
 	      $scope.user = {};
+	      $scope.confirmPassword = true;
+
+	      $scope.passwordMatch = function(user) {
+	        return user.password === user.confirmation;
+	      };
+
+	      $scope.disableButton = function(user) {
+	        return ($scope.userForm.$invalid && !$scope.passwordMatch(user));
+	      };
 
 	      $scope.sendToServer = function(user) {
 	        $http.post('/api/signup', user)
@@ -30612,9 +30640,62 @@
 /***/ function(module, exports) {
 
 	module.exports = function(app) {
-	  app.controller('TripsController', ['$scope', '$http', function($scope, $http) {
+	  app.directive('match', function() {
+	    return {
+	      //This solution is from http://stackoverflow.com/questions/14012239 (Jan Laussmann's solution)
+	      restrict: 'A',
+	      require: 'ngModel',
+	      link: function(scope, element, attrs, ngModel) {
+	        if(!ngModel) return; // do nothing if no ng-model
 
+	        // watch own value and re-validate on change
+	        scope.$watch(attrs.ngModel, function() {
+	          validate();
+	        });
+
+	        // observe the other value and re-validate on change
+	        attrs.$observe('match', function (val) {
+	          validate();
+	        });
+
+	        var validate = function() {
+	          // values
+	          var val1 = ngModel.$viewValue;
+	          var val2 = attrs.match;
+
+	          // set validity
+	          ngModel.$setValidity('match', ! val1 || ! val2 || val1 === val2);
+	        };
+	      }
+	    };
+	  });
+	};
+
+
+/***/ },
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = function(app) {
+	  __webpack_require__(15)(app);
+	};
+
+
+/***/ },
+/* 15 */
+/***/ function(module, exports) {
+
+	module.exports = function(app) {
+	  app.controller('TripsController', ['$scope', '$http', '$cookies', '$location', function($scope, $http, $cookies, $location) {
+
+	    var eat = $cookies.get('eat');
+	    if (!(eat && eat.length))
+	      $location.path('/signup');
+
+	    $http.defaults.headers.common.token = eat;
 	    $scope.trips = [];
+	    $scope.tripSearchResults = [];
+	    $scope.newTrip = {};
 
 	    $scope.getMyTrips = function() {
 	      $http.get('/api/trips')
@@ -30624,11 +30705,41 @@
 	          console.log(res);
 	        });
 	    };
+
+	    $scope.findTrip = function(tripSearchObj) {
+	      var search = JSON.stringify(tripSearchObj);
+	      $http.get('/api/trips/' + search)
+	        .then(function(res) {
+	          $scope.tripSearchResults = res.data;
+	        }, function(res) {
+	          console.log(res);
+	        });
+	    };
+
+	    $scope.createTrip = function(trip) {
+	      $http.post('/api/trips', {newTrip: trip})
+	        .then(function(res) {
+	          $scope.newTrip = {};
+	          $scope.trips.push(res.data);
+	        }, function(res) {
+	          console.log(res);
+	        });
+	    };
+
+	    $scope.tripSubsciption = function(trip) {
+	      $http.put('/api/trips', {tripConfig: trip})
+	        .then(function(res) {
+	          $scope.trips[$scope.trips.indexOf(trip)] = res.data;
+	        }, function(res) {
+	          console.log(res);
+	        });
+	    };
+
 	  }]);
 	};
 
 /***/ },
-/* 14 */
+/* 16 */
 /***/ function(module, exports) {
 
 	/**

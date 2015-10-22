@@ -7,6 +7,7 @@ module.exports = function(app) {
 
     $http.defaults.headers.common.token = eat;
     $scope.trips = [];
+    $scope.tripSearchResults = [];
     $scope.newTrip = {};
 
     $scope.getMyTrips = function() {
@@ -18,11 +19,30 @@ module.exports = function(app) {
         });
     };
 
+    $scope.findTrip = function(tripSearchObj) {
+      var search = JSON.stringify(tripSearchObj);
+      $http.get('/api/trips/' + search)
+        .then(function(res) {
+          $scope.tripSearchResults = res.data;
+        }, function(res) {
+          console.log(res);
+        });
+    };
+
     $scope.createTrip = function(trip) {
-      $http.post('/api/trips', trip)
+      $http.post('/api/trips', {newTrip: trip})
         .then(function(res) {
           $scope.newTrip = {};
           $scope.trips.push(res.data);
+        }, function(res) {
+          console.log(res);
+        });
+    };
+
+    $scope.tripSubsciption = function(trip) {
+      $http.put('/api/trips', {tripConfig: trip})
+        .then(function(res) {
+          $scope.trips[$scope.trips.indexOf(trip)] = res.data;
         }, function(res) {
           console.log(res);
         });
